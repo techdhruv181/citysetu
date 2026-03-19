@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - CitySetu</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="js/admin.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="assets/logo.png">
+                    CitySetu Admin
+                </div>
+                <div class="nav-links" id="navLinks">
+                    <a href="index.html">Home</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container" style="margin-top:60px;">
+        <h2 style="margin-top:50px;">Bookings</h2>
+        <div id="bookingList" class="grid"></div>
+        <h2 style="color: var(--primary-blue);">
+            Provider Approval Panel
+        </h2>
+
+        <p id="totalProviders"></p>
+
+        <div id="adminProviderList" class="grid"></div>
+    </div>
+    <script type="module" src="js/auth.js"></script>
+</body>
+
+</html>

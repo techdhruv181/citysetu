@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Provider Dashboard - CitySetu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <img src="assets/logo.png">
+          CitySetu Provider
+        </div>
+        <div class="nav-links" id="navLinks">
+          <a href="index.html">Home</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <div class="container" style="margin-top:40px;">
+
+    <h2 style="color: var(--primary-blue);">My Profile</h2>
+
+    <div class="card">
+
+      <form id="providerProfileForm">
+
+        <input type="text" id="providerName" placeholder="Your Name" required>
+
+        <input type="text" id="providerPhone" placeholder="Phone Number" required>
+
+        <input type="number" id="providerPrice" placeholder="Starting Price" required>
+
+        <select id="providerCategory">
+          <option value="Website Development">Website Development</option>
+          <option value="Logo Design">Logo Design</option>
+          <option value="Social Media Marketing">Social Media Marketing</option>
+          <option value="College Project Help">College Project Help</option>
+        </select>
+
+        <button class="btn btn-primary" type="submit">
+          Update Profile
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+  <div class="container" style="margin-top:60px;">
+    <h2 style="color: var(--primary-blue); margin-bottom: 30px;">
+      My Assigned Tasks
+    </h2>
+
+    <div id="taskList" class="grid"></div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div style="text-align:center;">
+        © 2026 CitySetu. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/provider-dashboard.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
+
+</html>
