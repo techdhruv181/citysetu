@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profit Margin Calculator India - Calculate Gross Margin & Markup</title>
+  <meta name="description" content="Calculate your business profit margin and markup percentage effortlessly. Free online tool for predicting sales performance.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .result-box { display:none; background:#f5f3ff; border:1px solid #a78bfa; padding:20px; border-radius:8px; margin-top:20px; text-align:center; }
+    .result-box h3 { color:#6d28d9; font-size:24px; margin-bottom:5px; }
+    .result-box p { font-size:16px; color:#333; margin-bottom:5px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <img src="assets/logo.png" alt="CitySetu Logo" onerror="this.style.display='none'">
+          <a href="index.html" style="text-decoration:none; color:inherit;">CitySetu</a>
+        </div>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="categories.html">Services</a>
+          <a href="calculators.html" style="color:var(--accent-orange); font-weight:600;">Calculators</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container" style="margin-top:40px; margin-bottom:60px;">
+    
+    <!-- Top AdSense Banner -->
+    <div style="width:100%; height:90px; background:#e0e0e0; margin-bottom:30px; display:flex; align-items:center; justify-content:center; color:#888; border-radius:8px;">
+       [ AdSense Banner Placeholder - Top ]
+    </div>
+
+    <div style="max-width:600px; margin:auto;">
+      <h1 style="color:var(--primary-blue); font-size:32px; text-align:center; margin-bottom:10px;">Profit Margin Calculator</h1>
+      <p style="text-align:center; color:#666; margin-bottom:30px;">Calculate exactly how much profit your business generates relative to costs.</p>
+
+      <div class="card" style="padding:30px;">
+        <label style="font-weight:500; display:block; margin-bottom:8px;">Cost Price (₹)</label>
+        <input type="number" id="costPrice" placeholder="e.g. 500" style="width:100%; padding:12px; margin-bottom:20px; border:1px solid #ddd; border-radius:8px;">
+
+        <label style="font-weight:500; display:block; margin-bottom:8px;">Selling Price (₹)</label>
+        <input type="number" id="sellingPrice" placeholder="e.g. 800" style="width:100%; padding:12px; margin-bottom:20px; border:1px solid #ddd; border-radius:8px;">
+
+        <button id="calcBtn" class="btn btn-primary" style="width:100%; font-size:16px;">Calculate Profit</button>
+
+        <div id="resultBox" class="result-box">
+           <p>Gross Profit: <strong id="resProfit" style="color:#16a34a;"></strong></p>
+           <h3 style="margin-top:10px;">Profit Margin: <span id="resMargin"></span></h3>
+           <p style="margin-top:10px; font-size:14px;">Markup: <strong id="resMarkup"></strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Middle AdSense Banner -->
+    <div style="width:100%; height:90px; background:#e0e0e0; margin:40px 0; display:flex; align-items:center; justify-content:center; color:#888; border-radius:8px;">
+       [ AdSense Banner Placeholder - Middle ]
+    </div>
+
+    <div style="max-width:600px; margin:auto;">
+        <h3 style="color:var(--primary-blue); margin-bottom:15px; text-align:center;">Related Calculators</h3>
+        <div style="display:flex; justify-content:center; gap:20px;">
+            <a href="gst-calculator.html" class="btn" style="background:#f0f0f0; color:#333;">GST Calculator</a>
+            <a href="discount-calculator.html" class="btn" style="background:#f0f0f0; color:#333;">Discount Calculator</a>
+        </div>
+    </div>
+
+    <!-- Bottom AdSense Banner -->
+    <div style="width:100%; height:90px; background:#e0e0e0; margin-top:40px; display:flex; align-items:center; justify-content:center; color:#888; border-radius:8px;">
+       [ AdSense Banner Placeholder - Bottom ]
+    </div>
+  </div>
+
+  <footer>
+    <div class="container" style="text-align:center;">
+      <p style="margin-bottom:15px;">CitySetu Calculators - Fast, Free & Accurate</p>
+      © 2026 CitySetu. All rights reserved.
+    </div>
+  </footer>
+
+  <script type="module">
+    import { calculateProfit } from './js/calculators.js';
+
+    document.getElementById("calcBtn").addEventListener("click", () => {
+        const cost = Number(document.getElementById("costPrice").value);
+        const sell = Number(document.getElementById("sellingPrice").value);
+
+        if(!cost || !sell) {
+            alert("Please fill all fields!");
+            return;
+        }
+
+        const res = calculateProfit(cost, sell);
+        if(res) {
+            document.getElementById("resProfit").innerText = res.grossProfit;
+            document.getElementById("resMargin").innerText = res.margin;
+            document.getElementById("resMarkup").innerText = res.markup;
+            document.getElementById("resultBox").style.display = "block";
+            
+            // Red warning if loss
+            if (sell < cost) {
+                 document.getElementById("resultBox").style.background = "#fef2f2";
+                 document.getElementById("resultBox").style.borderColor = "#ef4444";
+                 document.getElementById("resProfit").style.color = "#ef4444";
+                 document.getElementById("resMargin").style.color = "#ef4444";
+            } else {
+                 document.getElementById("resultBox").style.background = "#f5f3ff";
+                 document.getElementById("resultBox").style.borderColor = "#a78bfa";
+                 document.getElementById("resProfit").style.color = "#16a34a";
+                 document.getElementById("resMargin").style.color = "#6d28d9";
+            }
+        }
+    });
+  </script>
+</body>
+</html>

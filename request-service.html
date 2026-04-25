@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Post a Request - CitySetu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <img src="assets/logo.png" alt="CitySetu Logo" onerror="this.style.display='none'">
+          <a href="index.html" style="text-decoration:none; color:inherit;">CitySetu</a>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <a href="categories.html">Browse Services</a>
+          <a href="index.html">Home</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container" style="margin-top:60px; max-width: 600px;">
+    <h2 style="color: var(--primary-blue); text-align: center;">Post a Service Request</h2>
+    <p style="text-align: center; margin-bottom: 20px;">Describe what you need, and local experts will connect with you!</p>
+
+    <div class="card" style="padding: 30px;">
+        <form id="leadForm">
+            <label for="customerName" style="display:block; margin-bottom:5px; font-weight:500;">Your Name</label>
+            <input type="text" id="customerName" required placeholder="John Doe" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit;">
+
+            <label for="customerPhone" style="display:block; margin-bottom:5px; font-weight:500;">Phone Number (WhatsApp Preferred)</label>
+            <input type="tel" id="customerPhone" required placeholder="+91 9876543210" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit;">
+
+            <label for="city" style="display:block; margin-bottom:5px; font-weight:500;">Select City</label>
+            <select id="city" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit;">
+                <option value="">-- Choose City --</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+                <option value="Surat">Surat</option>
+                <option value="Vadodara">Vadodara</option>
+                <option value="Rajkot">Rajkot</option>
+            </select>
+
+            <label for="category" style="display:block; margin-bottom:5px; font-weight:500;">Service Category</label>
+            <select id="category" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit;">
+                <option value="">-- Choose Service --</option>
+                <option value="Website Development">Website Development</option>
+                <option value="Logo Design">Logo Design</option>
+                <option value="Social Media Marketing">Social Media Marketing</option>
+                <option value="College Project Help">College Project Help</option>
+                <option value="Electrician">Electrician</option>
+                <option value="Plumber">Plumber</option>
+            </select>
+
+            <label for="description" style="display:block; margin-bottom:5px; font-weight:500;">Describe Your Requirement</label>
+            <textarea id="description" required rows="4" placeholder="I need someone to fix the wiring in my house..." style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit; resize: vertical;"></textarea>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 16px; padding: 12px;" id="submitBtn">Post Request Now</button>
+        </form>
+        <div id="successMsg" style="display: none; margin-top: 20px; color: #2e7d32; text-align: center; font-weight: bold; background: #e8f5e9; padding: 15px; border-radius: 5px;">
+            🎉 Your request has been posted successfully!<br>Local providers will contact you soon.
+        </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/request-service.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Percentage Calculator Online - Free Math Tool</title>
+  <meta name="description" content="Calculate percentages instantly. Find out what percent A is of B, or X% of Y easily in your browser without reloading.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .result-box { display:none; background:#f3f4f6; border:1px solid #9ca3af; padding:15px; border-radius:8px; margin-top:15px; text-align:center; }
+    .result-box h3 { color:#1E2A78; font-size:20px; margin-top:5px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <img src="assets/logo.png" alt="CitySetu Logo" onerror="this.style.display='none'">
+          <a href="index.html" style="text-decoration:none; color:inherit;">CitySetu</a>
+        </div>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="categories.html">Services</a>
+          <a href="calculators.html" style="color:var(--accent-orange); font-weight:600;">Calculators</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container" style="margin-top:40px; margin-bottom:60px;">
+    
+    <!-- Top AdSense Banner -->
+    <div style="width:100%; height:90px; background:#e0e0e0; margin-bottom:30px; display:flex; align-items:center; justify-content:center; color:#888; border-radius:8px;">
+       [ AdSense Banner Placeholder - Top ]
+    </div>
+
+    <div style="max-width:700px; margin:auto;">
+      <h1 style="color:var(--primary-blue); font-size:32px; text-align:center; margin-bottom:10px;">Percentage Calculator</h1>
+      <p style="text-align:center; color:#666; margin-bottom:30px;">Solve common percentage math problems quickly.</p>
+
+      <div style="display:flex; flex-wrap:wrap; gap:20px;">
+          <!-- TYPE 1 -->
+          <div class="card" style="padding:25px; flex:1; min-width:300px;">
+            <p style="font-weight:600; color:var(--primary-blue); margin-bottom:15px;">What is X% of Y?</p>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                <input type="number" id="t1X" placeholder="%" style="flex:1; padding:10px; border:1px solid #ddd; border-radius:5px;">
+                <span>% of</span>
+                <input type="number" id="t1Y" placeholder="Number" style="flex:1; padding:10px; border:1px solid #ddd; border-radius:5px;">
+            </div>
+            <button id="btn1" class="btn btn-primary" style="width:100%;">Calculate</button>
+            <div id="resBox1" class="result-box">
+                <p>Result:</p>
+                <h3 id="res1"></h3>
+            </div>
+          </div>
+
+          <!-- TYPE 2 -->
+          <div class="card" style="padding:25px; flex:1; min-width:300px;">
+            <p style="font-weight:600; color:var(--primary-blue); margin-bottom:15px;">A is what % of B?</p>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                <input type="number" id="t2A" placeholder="Number" style="flex:1; padding:10px; border:1px solid #ddd; border-radius:5px;">
+                <span>is what % of</span>
+                <input type="number" id="t2B" placeholder="Number" style="flex:1; padding:10px; border:1px solid #ddd; border-radius:5px;">
+            </div>
+            <button id="btn2" class="btn btn-orange" style="width:100%;">Calculate</button>
+            <div id="resBox2" class="result-box">
+                <p>Result:</p>
+                <h3 id="res2"></h3>
+            </div>
+          </div>
+      </div>
+      
+    </div>
+
+    <!-- Middle AdSense Banner -->
+    <div style="width:100%; height:90px; background:#e0e0e0; margin:40px 0; display:flex; align-items:center; justify-content:center; color:#888; border-radius:8px;">
+       [ AdSense Banner Placeholder - Middle ]
+    </div>
+
+    <div style="max-width:600px; margin:auto;">
+        <h3 style="color:var(--primary-blue); margin-bottom:15px; text-align:center;">Related Calculators</h3>
+        <div style="display:flex; justify-content:center; gap:20px;">
+            <a href="discount-calculator.html" class="btn" style="background:#f0f0f0; color:#333;">Discount Calculator</a>
+            <a href="profit-calculator.html" class="btn" style="background:#f0f0f0; color:#333;">Profit Margin</a >
+        </div>
+    </div>
+
+    <!-- Bottom AdSense Banner -->
+    <div style="width:100%; height:90px; background:#e0e0e0; margin-top:40px; display:flex; align-items:center; justify-content:center; color:#888; border-radius:8px;">
+       [ AdSense Banner Placeholder - Bottom ]
+    </div>
+  </div>
+
+  <footer>
+    <div class="container" style="text-align:center;">
+      <p style="margin-bottom:15px;">CitySetu Calculators - Fast, Free & Accurate</p>
+      © 2026 CitySetu. All rights reserved.
+    </div>
+  </footer>
+
+  <script type="module">
+    import { calculatePercentage, calculatePercentageOf } from './js/calculators.js';
+
+    document.getElementById("btn1").addEventListener("click", () => {
+        const x = Number(document.getElementById("t1X").value);
+        const y = Number(document.getElementById("t1Y").value);
+        if(!x || !y) return alert("Fill fields");
+
+        document.getElementById("res1").innerText = calculatePercentageOf(x, y).result;
+        document.getElementById("resBox1").style.display = "block";
+    });
+
+    document.getElementById("btn2").addEventListener("click", () => {
+        const a = Number(document.getElementById("t2A").value);
+        const b = Number(document.getElementById("t2B").value);
+        if(!a || !b) return alert("Fill fields");
+
+        document.getElementById("res2").innerText = calculatePercentage(a, b).percentage;
+        document.getElementById("resBox2").style.display = "block";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EMI Calculator India 2026 - Home & Car Loan EMI</title>
+  <meta name="description" content="Calculate your loan EMI accurately. Free online EMI calculator for Home, Personal, and Car Loans. Get instant monthly payment details.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .result-box { display:none; background:#e0f2fe; border:1px solid #38bdf8; padding:20px; border-radius:8px; margin-top:20px; text-align:center; }
+    .result-box h3 { color:#0369a1; font-size:24px; margin-bottom:5px; }
+    .result-box p { font-size:16px; color:#333; margin-bottom:5px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <img src="assets/logo.png" alt="CitySetu Logo" onerror="this.style.display='none'">
+          <a href="index.html" style="text-decoration:none; color:inherit;">CitySetu</a>
+        </div>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="categories.html">Services</a>
+          <a href="calculators.html" style="color:var(--accent-orange); font-weight:600;">Calculators</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container" style="margin-top:40px; margin-bottom:60px;">
+    
+    <!-- Top AdSense Banner -->
+    <div style="width:100%; height:90px; background:#e0e0e0; margin-bottom:30px; display:flex; align-items:center; justify-content:center; color:#888; border-radius:8px;">
+       [ AdSense Banner Placeholder - Top ]
+    </div>
+
+    <div style="max-width:600px; margin:auto;">
+      <h1 style="color:var(--primary-blue); font-size:32px; text-align:center; margin-bottom:10px;">Loan EMI Calculator</h1>
+      <p style="text-align:center; color:#666; margin-bottom:30px;">Calculate your monthly EMI for Home, Car, or Personal Loans instantly.</p>
+
+      <div class="card" style="padding:30px;">
+        <label for="principal" style="font-weight:500; display:block; margin-bottom:8px;">Loan Amount (₹)</label>
+        <input type="number" id="principal" placeholder="e.g. 1000000" style="width:100%; padding:12px; margin-bottom:20px; border:1px solid #ddd; border-radius:8px;">
+
+        <label for="rate" style="font-weight:500; display:block; margin-bottom:8px;">Interest Rate (p.a %)</label>
+        <input type="number" id="rate" placeholder="e.g. 8.5" style="width:100%; padding:12px; margin-bottom:20px; border:1px solid #ddd; border-radius:8px;">
+
+        <label for="years" style="font-weight:500; display:block; margin-bottom:8px;">Loan Tenure (Years)</label>
+        <input type="number" id="years" placeholder="e.g. 10" style="width:100%; padding:12px; margin-bottom:20px; border:1px solid #ddd; border-radius:8px;">
+
+        <button id="calcBtn" class="btn btn-primary" style="width:100%; font-size:16px;">Calculate EMI</button>
+
+        <div id="resultBox" class="result-box">
+           <h3>Monthly EMI: <span id="resEmi"></span></h3>
+           <p>Total Interest: <strong id="resInterest"></strong></p>
+           <p>Total Payment: <strong id="resPayment"></strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Middle AdSense Banner -->
+    <div style="width:100%; height:90px; background:#e0e0e0; margin:40px 0; display:flex; align-items:center; justify-content:center; color:#888; border-radius:8px;">
+       [ AdSense Banner Placeholder - Middle ]
+    </div>
+
+    <div style="max-width:600px; margin:auto;">
+        <h3 style="color:var(--primary-blue); margin-bottom:15px; text-align:center;">Related Calculators</h3>
+        <div style="display:flex; justify-content:center; gap:20px;">
+            <a href="sip-calculator.html" class="btn" style="background:#f0f0f0; color:#333;">SIP Calculator</a>
+            <a href="interest-calculator.html" class="btn" style="background:#f0f0f0; color:#333;">Interest Calculator</a>
+        </div>
+    </div>
+
+    <!-- Bottom AdSense Banner -->
+    <div style="width:100%; height:90px; background:#e0e0e0; margin-top:40px; display:flex; align-items:center; justify-content:center; color:#888; border-radius:8px;">
+       [ AdSense Banner Placeholder - Bottom ]
+    </div>
+  </div>
+
+  <footer>
+    <div class="container" style="text-align:center;">
+      <p style="margin-bottom:15px;">CitySetu Calculators - Fast, Free & Accurate</p>
+      © 2026 CitySetu. All rights reserved.
+    </div>
+  </footer>
+
+  <script type="module">
+    import { calculateEMI } from './js/calculators.js';
+
+    document.getElementById("calcBtn").addEventListener("click", () => {
+        const p = Number(document.getElementById("principal").value);
+        const rate = Number(document.getElementById("rate").value);
+        const years = Number(document.getElementById("years").value);
+
+        if(!p || !rate || !years) {
+            alert("Please fill all fields!");
+            return;
+        }
+
+        const res = calculateEMI(p, rate, years);
+        if(res) {
+            document.getElementById("resEmi").innerText = res.monthlyEmi;
+            document.getElementById("resInterest").innerText = res.totalInterest;
+            document.getElementById("resPayment").innerText = res.totalPayment;
+            document.getElementById("resultBox").style.display = "block";
+        }
+    });
+  </script>
+</body>
+</html>

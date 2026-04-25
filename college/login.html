@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - CitySetu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">
+        <img src="logo.png">
+        CitySetu
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <h2 style="margin-top:60px; color: var(--primary-blue); text-align:center;">
+    Login
+  </h2>
+
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="Email Address" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button type="submit" class="btn btn-primary" style="width:100%;">
+      Login
+    </button>
+  </form>
+</div>
+
+<footer>
+  <div class="container">
+    <div style="text-align:center;">
+      © 2026 CitySetu
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="js/auth.js"></script>
+</body>
+</html>
