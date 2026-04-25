@@ -24,6 +24,8 @@
           CitySetu
         </div>
 
+        <button class="menu-toggle" id="mobileMenuBtn">&#9776;</button>
+
         <div class="nav-links" id="navLinks">
           <a href="categories.html">Browse Services</a>
           <a href="#how">How It Works</a>
@@ -196,6 +198,14 @@
   <script type="module" src="js/auth.js"></script>
   <script type="module" src="js/chatbot.js"></script>
   <script src="js/location.js"></script>
+  <script>
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    if(menuBtn) {
+      menuBtn.addEventListener('click', function() {
+        document.getElementById('navLinks').classList.toggle('show');
+      });
+    }
+  </script>
 </body>
 
 </html>
