@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin.html
+Disallow: /provider-dashboard.html
+Disallow: /profile.html
+
+Sitemap: https://citysetu.in/sitemap.xml

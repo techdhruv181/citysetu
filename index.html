@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>CitySetu - Your City, Your Services, One Setu</title>
+  <title>CitySetu - Local Services & Technicians in Ahmedabad, Gujarat</title>
+  <meta name="description" content="Find trusted local service providers in Ahmedabad, Gujarat. Hire web developers, technicians, and digital experts. Ghar betha service Ahmedabad.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Google Font -->
@@ -11,9 +12,24 @@
 
   <!-- Main CSS -->
   <link rel="stylesheet" href="css/style.css">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7983632889924408"
-     crossorigin="anonymous"></script>
-  <link rel="canonical" href="https://citysetu.in/">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7983632889924408" crossorigin="anonymous"></script>
+  <link rel="canonical" href="https://citysetu.in/index.html">
+  <script type="application/ld+json">
+  {
+   "@context": "https://schema.org",
+   "@type": "Organization",
+   "name": "CitySetu",
+   "url": "https://citysetu.in",
+   "logo": "https://citysetu.in/assets/logo.png",
+   "description": "CitySetu connects you with local service providers and experts in Ahmedabad, Gujarat. Find services near me easily.",
+   "address": {
+     "@type": "PostalAddress",
+     "addressLocality": "Ahmedabad",
+     "addressRegion": "Gujarat",
+     "addressCountry": "IN"
+   }
+  }
+  </script>
 </head>
 
 <body>
@@ -23,7 +39,7 @@
     <div class="container">
       <nav>
         <div class="logo">
-          <img src="assets/logo.png" alt="CitySetu Logo">
+          <img src="assets/logo.png" alt="CitySetu Logo - Local Services Ahmedabad" loading="lazy">
           CitySetu
         </div>
 
@@ -51,8 +67,8 @@
   <!-- ================= HERO ================= -->
   <div class="container">
     <section class="hero">
-      <h1>Connecting You With Trusted Digital Experts</h1>
-      <p>Your City, Your Services, One Setu</p>
+      <h1>Hire Trusted Local Service Providers in <span class="city-name">Ahmedabad</span></h1>
+      <p>Your City, Your Services, One Setu. Find the best city services <span class="city-name">Ahmedabad</span> has to offer. From laptop repair <span class="city-name">Ahmedabad</span> to sasti web design service Gujarat, we connect you with top-rated experts. Get ghar betha service <span class="city-name">Ahmedabad</span> with a few clicks!</p>
 
       <div style="margin-top:20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
         <button class="btn btn-primary open-chatbot-btn">Get Free Service Quote</button>
@@ -65,7 +81,7 @@
   <!-- ================= POPULAR SERVICES ================= -->
   <div class="container">
     <h2 style="color: var(--primary-blue); margin-bottom: 20px;">
-      Popular Services
+      Popular Local Services in <span class="city-name">Ahmedabad</span>
     </h2>
 
     <div class="grid">
@@ -196,11 +212,22 @@
     </div>
   </div>
 
+  <!-- ================= INTERNAL LINKING SECTION ================= -->
+  <div class="container" style="margin-top:60px; margin-bottom:60px;">
+    <h2 style="color: var(--primary-blue); margin-bottom: 20px;">Top Calculators</h2>
+    <div style="display:flex; gap:15px; flex-wrap:wrap;">
+      <a href="emi-calculator.html" class="btn btn-primary" style="background:var(--white); color:var(--primary-blue); border:1px solid var(--primary-blue);">EMI Calculator</a>
+      <a href="sip-calculator.html" class="btn btn-primary" style="background:var(--white); color:var(--primary-blue); border:1px solid var(--primary-blue);">SIP Calculator</a>
+      <a href="gst-calculator.html" class="btn btn-primary" style="background:var(--white); color:var(--primary-blue); border:1px solid var(--primary-blue);">GST Calculator</a>
+      <a href="calculators.html" class="btn btn-orange">View All Calculators</a>
+    </div>
+  </div>
+
   <button class="floating-chatbot-btn open-chatbot-btn">💬</button>
 
   <script type="module" src="js/auth.js"></script>
   <script type="module" src="js/chatbot.js"></script>
-  <script src="js/location.js"></script>
+  <script src="js/location.js" defer></script>
   <script>
     const menuBtn = document.getElementById('mobileMenuBtn');
     if(menuBtn) {
