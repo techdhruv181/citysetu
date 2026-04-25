@@ -29,7 +29,10 @@ if (navigator.geolocation && !savedCity) {
         const lon = position.coords.longitude;
         const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`);
         const data = await res.json();
-        const city = data.address.city || data.address.town || data.address.state;
+        let city = data.address.city || data.address.town || data.address.village || data.address.county || data.address.state_district || data.address.state;
+        if (city && city.endsWith(" District")) {
+            city = city.replace(" District", "");
+        }
         if (city) {
             localStorage.setItem("city", city);
             if (citySelect) {
