@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Legal & Information - CitySetu</title>
+  <meta name="description" content="Privacy Policy, Terms of Service, and About Us for CitySetu.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .legal-section {
+      margin-bottom: 40px;
+      padding-top: 40px;
+    }
+    .legal-section h2 {
+      color: var(--primary-blue);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border-color);
+    }
+    .legal-section h3 {
+      color: var(--dark-gray);
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    .legal-section p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+    .legal-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--white);
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+    .nav-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .nav-tabs a {
+      padding: 10px 20px;
+      background: var(--bg-gray);
+      color: var(--dark-gray);
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    .nav-tabs a:hover {
+      background: var(--primary-blue);
+      color: var(--white);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+            <img src="assets/logo.png" alt="CitySetu Logo" loading="lazy">
+            CitySetu
+          </a>
+        </div>
+
+        <button class="menu-toggle" id="mobileMenuBtn">&#9776;</button>
+
+        <div class="nav-links" id="navLinks">
+          <a href="categories.html">Browse Services</a>
+          <a href="index.html#how">How It Works</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="legal-container">
+      <div class="nav-tabs">
+        <a href="legal.html#about-us">About Us</a>
+        <a href="legal.html#privacy-policy">Privacy Policy</a>
+        <a href="#terms">Terms of Service</a>
+      </div>
+
+      <section id="about-us" class="legal-section">
+        <h2>About Us</h2>
+        <p>Welcome to CitySetu, your trusted platform for connecting with local service providers and experts in your city. Our mission is to bridge the gap between skilled professionals and customers seeking reliable services.</p>
+        <p>Whether you need web development, local repairs, marketing experts, or academic help, CitySetu makes it easy to find and hire the best talent right in your neighborhood.</p>
+        <p>We believe in fostering local economies by empowering local professionals to showcase their skills and helping customers get fast, high-quality service without the hassle.</p>
+      </section>
+
+      <section id="privacy-policy" class="legal-section">
+        <h2>Privacy Policy</h2>
+        <p>At CitySetu, we take your privacy seriously. This policy outlines how we collect, use, and protect your personal information.</p>
+        <h3>Information We Collect</h3>
+        <p>We may collect information such as your name, email address, phone number, and location when you register or use our services to connect with professionals.</p>
+        <h3>How We Use Your Information</h3>
+        <p>Your information is used to provide and improve our services, facilitate communication between you and service providers, and ensure a safe and secure environment on our platform.</p>
+        <h3>Data Security</h3>
+        <p>We implement industry-standard security measures to protect your personal information from unauthorized access, disclosure, or alteration.</p>
+      </section>
+
+      <section id="terms" class="legal-section">
+        <h2>Terms of Service</h2>
+        <p>By accessing or using CitySetu, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you may not use our platform.</p>
+        <h3>User Responsibilities</h3>
+        <p>You agree to use the platform only for lawful purposes. You must provide accurate information when registering and communicating with service providers or customers.</p>
+        <h3>Service Agreements</h3>
+        <p>CitySetu acts as a bridge between users and service providers. Any agreements, contracts, or transactions made are solely between the user and the provider. CitySetu is not liable for disputes arising from these interactions.</p>
+        <h3>Changes to Terms</h3>
+        <p>We reserve the right to modify these terms at any time. Continued use of the platform after changes implies your acceptance of the new terms.</p>
+      </section>
+    </div>
+  </div>
+
+    <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="container">
+      <div class="grid">
+        <div>
+          <h4>CitySetu</h4>
+          <p style="font-size:14px;">
+            Connecting digital experts with customers in your city.
+          </p>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="legal.html#about-us">About Us</a>
+          <a href="#">Careers</a>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <a href="#">Help Center</a>
+          <a href="mailto:techdhruv181@gmail.com">Contact</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="legal.html#terms">Terms</a>
+          <a href="legal.html#privacy-policy">Privacy Policy</a>
+        </div>
+      </div>
+      <div style="margin-top:40px; text-align:center; font-size:14px;">
+        © 2026 CitySetu. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/location.js" defer></script>
+  <script>
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    if(menuBtn) {
+      menuBtn.addEventListener('click', function() {
+        document.getElementById('navLinks').classList.toggle('show');
+      });
+    }
+  </script>
+</body>
+
+</html>
