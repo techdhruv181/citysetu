@@ -8,7 +8,9 @@ import {
   doc,
   onSnapshot,
   query,
-  orderBy
+  orderBy,
+  addDoc,
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 import {
@@ -20,6 +22,35 @@ const ADMIN_EMAIL = "dhruviltechshop@gmail.com";
 const providerList = document.getElementById("adminProviderList");
 const bookingList = document.getElementById("bookingList");
 const totalText = document.getElementById("totalProviders");
+
+// Plan Modal Elements
+const editPlanModal = document.getElementById("editPlanModal");
+const editPlanName = document.getElementById("editPlanName");
+const editPlanCredits = document.getElementById("editPlanCredits");
+const editPlanProviderId = document.getElementById("editPlanProviderId");
+const savePlanBtn = document.getElementById("savePlanBtn");
+
+if (savePlanBtn) {
+  savePlanBtn.addEventListener("click", async () => {
+    const pId = editPlanProviderId.value;
+    const pName = editPlanName.value;
+    const pCredits = parseInt(editPlanCredits.value) || 0;
+    
+    if(!pId) return;
+    
+    try {
+      await updateDoc(doc(db, "providers", pId), {
+        plan: pName,
+        credits: pCredits
+      });
+      window.showToast("Plan updated successfully!", "success");
+      editPlanModal.style.display = "none";
+      loadProviders();
+    } catch(err) {
+      alert("Error updating plan: " + err.message);
+    }
+  });
+}
 
 // 🔐 Protect Admin Page
 onAuthStateChanged(auth, (user) => {
@@ -62,16 +93,18 @@ async function loadProviders() {
     card.classList.add("card");
 
     card.innerHTML = `
-      <h3>${data.name}</h3>
-      <p>Category: ${data.category}</p>
-      <p>Status: ${data.approved ? "Approved ✅" : "Pending ⏳"}</p>
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+        <h3 style="margin-bottom: 0;">${data.name}</h3>
+        <span class="chip" style="background: ${data.approved ? 'var(--success-bg)' : 'var(--warning-bg)'}; color: ${data.approved ? 'var(--success)' : 'var(--warning)'};">${data.approved ? "Approved ✅" : "Pending ⏳"}</span>
+      </div>
+      <p style="margin-bottom: 5px;"><strong>Category:</strong> ${data.category}</p>
+      <p style="margin-bottom: 5px;"><strong>Phone:</strong> ${data.phone}</p>
+      <p style="margin-bottom: 15px;"><strong>Plan:</strong> ${data.plan || 'Free'} | <strong>Credits:</strong> ${data.credits || 0}</p>
 
-      <div style="margin-top:15px;">
-        ${!data.approved
-        ? `<button class="btn btn-primary approve-btn">Approve</button>`
-        : ""
-      }
-        <button class="btn btn-orange delete-btn">Delete</button>
+      <div style="margin-top:auto; display: flex; gap: 10px; flex-wrap: wrap;">
+        ${!data.approved ? `<button class="btn btn-primary approve-btn" style="flex:1;">Approve</button>` : ""}
+        <button class="btn btn-outline edit-plan-btn" style="flex:1; border-color:var(--primary-blue); color:var(--primary-blue);">Edit Plan</button>
+        <button class="btn btn-orange delete-btn" style="flex:1; background: var(--danger);">Delete</button>
       </div>
     `;
 
@@ -82,8 +115,19 @@ async function loadProviders() {
         await updateDoc(doc(db, "providers", id), {
           approved: true
         });
-        alert("Provider Approved!");
+        window.showToast("Provider Approved!", "success");
         loadProviders();
+      });
+    }
+    
+    // Edit Plan
+    const editPlanBtn = card.querySelector(".edit-plan-btn");
+    if(editPlanBtn) {
+      editPlanBtn.addEventListener("click", () => {
+        editPlanProviderId.value = id;
+        editPlanName.value = data.plan || "Free";
+        editPlanCredits.value = data.credits || 0;
+        editPlanModal.style.display = "flex";
       });
     }
 
@@ -138,16 +182,18 @@ function renderLeads() {
     card.classList.add("card");
 
     card.innerHTML = `
-      <h3>${data.service || 'Unknown Service'}</h3>
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+        <h3 style="margin-bottom: 0;">${data.service || 'Unknown Service'}</h3>
+        <span class="chip chip-${data.status}">${data.status.toUpperCase()}</span>
+      </div>
       <p><strong>Customer:</strong> ${data.name}</p>
       <p><strong>Phone:</strong> ${data.phone}</p>
       <p><strong>Location:</strong> ${data.location}</p>
-      <p><strong>Description:</strong> ${data.description}</p>
-      <p><strong>Assigned To:</strong> <span style="font-weight:600; color:#1E2A78;">${data.assignedToName || 'None (Broadcast)'}</span></p>
-      <p><strong>Status:</strong> <span style="font-weight:bold; color: ${data.status === 'new' ? '#10B981' : data.status === 'contacted' ? '#F97316' : '#6B7280'}">${data.status.toUpperCase()}</span></p>
+      <p style="background: var(--bg-main); padding: 10px; border-radius: 6px; margin: 10px 0; font-size: 14px;"><strong>Req:</strong> ${data.description}</p>
+      <p><strong>Assigned To:</strong> <span style="font-weight:600; color:var(--primary-blue);">${data.assignedToName || 'None (Broadcast)'}</span></p>
 
-      <div style="margin-top:15px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-        <select class="assign-select" style="padding:6px; border-radius:6px; border:1px solid #ddd; outline:none; max-width:200px;">
+      <div style="margin-top:15px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; background: var(--bg-main); padding: 10px; border-radius: 6px; border: 1px solid var(--border-light);">
+        <select class="assign-select" style="flex: 1; padding:8px; border-radius:6px; border:1px solid var(--border-light); outline:none;">
            <option value="">-- Unassigned (Broadcast) --</option>
            ${allProvidersData.filter(p => p.category === data.service && p.approved).map(p => 
              `<option value="${p.id}" ${data.assignedTo === p.id ? 'selected' : ''}>${p.name}</option>`
@@ -156,9 +202,9 @@ function renderLeads() {
         <button class="btn btn-primary assign-btn">Assign</button>
       </div>
       <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
-        ${data.status === "new" ? `<button class="btn btn-primary contact-btn">Mark Contacted</button>` : ""}
-        ${data.status === "contacted" ? `<button class="btn btn-primary close-btn">Mark Closed</button>` : ""}
-        <button class="btn btn-orange delete-lead-btn" style="background:#EF4444;">Delete</button>
+        ${data.status === "new" ? `<button class="btn btn-outline contact-btn" style="flex:1; padding: 8px;">Contacted</button>` : ""}
+        ${data.status === "contacted" ? `<button class="btn btn-outline close-btn" style="flex:1; padding: 8px;">Closed</button>` : ""}
+        <button class="btn btn-orange delete-lead-btn" style="flex:1; padding: 8px; background:var(--danger); box-shadow:none;">Delete</button>
       </div>
     `;
 
@@ -207,3 +253,94 @@ function renderLeads() {
     leadList.appendChild(card);
   });
 }
+
+
+// ================= PLANS MANAGEMENT =================
+const adminPlanList = document.getElementById("adminPlanList");
+const managePlanModal = document.getElementById("managePlanModal");
+const openAddPlanBtn = document.getElementById("openAddPlanBtn");
+const saveGlobalPlanBtn = document.getElementById("saveGlobalPlanBtn");
+const managePlanId = document.getElementById("managePlanId");
+const managePlanName = document.getElementById("managePlanName");
+const managePlanCredits = document.getElementById("managePlanCredits");
+const managePlanDuration = document.getElementById("managePlanDuration");
+const managePlanPrice = document.getElementById("managePlanPrice");
+
+if(openAddPlanBtn) {
+  openAddPlanBtn.addEventListener("click", () => {
+    document.getElementById("managePlanTitle").innerText = "Add Subscription Plan";
+    managePlanId.value = "";
+    managePlanName.value = "";
+    managePlanCredits.value = "";
+    managePlanDuration.value = "";
+    managePlanPrice.value = "";
+    managePlanModal.style.display = "flex";
+  });
+}
+
+if(saveGlobalPlanBtn) {
+  saveGlobalPlanBtn.addEventListener("click", async () => {
+    const id = managePlanId.value;
+    const pData = {
+      name: managePlanName.value,
+      credits: parseInt(managePlanCredits.value) || 0,
+      durationDays: parseInt(managePlanDuration.value) || 0,
+      price: managePlanPrice.value,
+      createdAt: serverTimestamp()
+    };
+    
+    if(id) {
+      await updateDoc(doc(db, "plans", id), pData);
+      window.showToast("Plan updated!", "success");
+    } else {
+      await addDoc(collection(db, "plans"), pData);
+      window.showToast("Plan created!", "success");
+    }
+    managePlanModal.style.display = "none";
+  });
+}
+
+async function loadPlans() {
+  if(!adminPlanList) return;
+  const q = query(collection(db, "plans"), orderBy("credits", "asc"));
+  onSnapshot(q, (snapshot) => {
+    adminPlanList.innerHTML = "";
+    snapshot.forEach(docSnap => {
+      const data = docSnap.data();
+      const id = docSnap.id;
+      
+      const card = document.createElement("div");
+      card.classList.add("card");
+      card.innerHTML = `
+        <h3 style="color:var(--primary-blue);">${data.name}</h3>
+        <p><strong>Lead Credits:</strong> ${data.credits}</p>
+        <p><strong>Duration:</strong> ${data.durationDays} Days</p>
+        <p style="font-size: 18px; font-weight:600; color:var(--accent-orange); margin-top:10px;">${data.price}</p>
+        <div style="display:flex; gap:10px; margin-top:15px;">
+          <button class="btn btn-outline edit-global-plan" style="flex:1;">Edit</button>
+          <button class="btn btn-orange delete-global-plan" style="flex:1; background:var(--danger);">Delete</button>
+        </div>
+      `;
+      
+      card.querySelector(".edit-global-plan").addEventListener("click", () => {
+        document.getElementById("managePlanTitle").innerText = "Edit Subscription Plan";
+        managePlanId.value = id;
+        managePlanName.value = data.name;
+        managePlanCredits.value = data.credits;
+        managePlanDuration.value = data.durationDays;
+        managePlanPrice.value = data.price;
+        managePlanModal.style.display = "flex";
+      });
+      
+      card.querySelector(".delete-global-plan").addEventListener("click", async () => {
+        if(confirm("Delete this plan globally?")) {
+           await deleteDoc(doc(db, "plans", id));
+        }
+      });
+      
+      adminPlanList.appendChild(card);
+    });
+  });
+}
+
+loadPlans();

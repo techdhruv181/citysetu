@@ -55,9 +55,9 @@ async function loadThreads(uid) {
             const div = document.createElement("div");
             div.style.cssText = "padding:15px; border-bottom:1px solid #eee; cursor:pointer; background:white; border-radius:5px; margin-bottom:5px;";
             div.innerHTML = `
-                <div style="font-weight:600; color:#1E2A78; font-size:14px;">${data.service}</div>
-                <div style="font-size:12px; color:#666; margin-top:5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${data.description}</div>
-                <div style="font-size:10px; margin-top:8px; padding:3px 8px; border-radius:12px; display:inline-block; background:${data.status === 'new' ? '#E0F2FE' : '#FEF3C7'}; color:${data.status === 'new' ? '#0284C7' : '#D97706'};">${data.status.toUpperCase()}</div>
+                <div style="font-weight:600; color:var(--primary-blue); font-size:14px;">${data.service}</div>
+                <div style="font-size:13px; color:var(--text-muted); margin-top:5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${data.description}</div>
+                <div style="font-size:11px; margin-top:8px; display:inline-block;" class="chip chip-${data.status}">${data.status.toUpperCase()}</div>
             `;
             
             div.addEventListener("click", () => {

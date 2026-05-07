@@ -5,40 +5,9 @@
   <title>Post a Service Request - Get Local Services in Ahmedabad Near Me</title>
   <meta name="description" content="Post a free request for local service providers in Ahmedabad, Gujarat. Get quick responses for home repairs, web design, and more. Ghar betha service.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-    <!-- ================= FOOTER ================= -->
-  <footer>
-    <div class="container">
-      <div class="grid">
-        <div>
-          <h4>CitySetu</h4>
-          <p style="font-size:14px;">
-            Connecting digital experts with customers in your city.
-          </p>
-        </div>
-        <div>
-          <h4>Company</h4>
-          <a href="legal.html#about-us">About Us</a>
-          <a href="#">Careers</a>
-        </div>
-        <div>
-          <h4>Support</h4>
-          <a href="#">Help Center</a>
-          <a href="mailto:techdhruv181@gmail.com">Contact</a>
-        </div>
-        <div>
-          <h4>Legal</h4>
-          <a href="legal.html#terms">Terms</a>
-          <a href="legal.html#privacy-policy">Privacy Policy</a>
-        </div>
-      </div>
-      <div style="margin-top:40px; text-align:center; font-size:14px;">
-        © 2026 CitySetu. All rights reserved.
-      </div>
-    </div>
-  </footer>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7983632889924408" crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7983632889924408" crossorigin="anonymous"></script>
   <link rel="canonical" href="https://citysetu.in/request-service.html">
   <script type="application/ld+json">
   {
@@ -51,65 +20,137 @@
   </script>
 </head>
 <body>
+  <!-- ================= NAVBAR ================= -->
   <header>
     <div class="container">
       <nav>
-        <div class="logo">
-          <img src="assets/logo.png" alt="CitySetu Logo - Local Services near me" onerror="this.style.display='none'" loading="lazy">
-          <a href="index.html" style="text-decoration:none; color:inherit;">CitySetu</a>
-        </div>
+        <a href="index.html" class="logo">
+          <img src="assets/logo.png" alt="CitySetu Logo" onerror="this.style.display='none'" loading="lazy">
+          CitySetu
+        </a>
+
+        <button class="menu-toggle" id="mobileMenuBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+
         <div class="nav-links" id="navLinks">
           <a href="categories.html">Browse Services</a>
           <a href="index.html">Home</a>
+          <!-- Auth links will be injected here by auth.js -->
         </div>
       </nav>
     </div>
   </header>
 
   <div class="container" style="margin-top:60px; max-width: 600px; margin-bottom: 60px;">
-    <h1 style="color: var(--primary-blue); text-align: center; font-size:28px;">Post a Service Request in Ahmedabad</h1>
-    <p style="text-align: center; margin-bottom: 20px; color:#555;">Need a fast fix? Describe what you need, and the best local service providers near me will connect with you. Enjoy ghar betha service Ahmedabad for all your digital and physical needs!</p>
+    <div style="text-align: center; margin-bottom: 30px;">
+      <h1 style="color: var(--primary-blue); font-size: 32px; font-weight: 800; margin-bottom: 10px;">Post a Free Request</h1>
+      <p style="color: var(--text-muted); font-size: 16px;">Describe what you need, and the best local service providers will connect with you securely.</p>
+    </div>
 
-    <div class="card" style="padding: 30px;">
+    <div class="form-container" style="padding: 35px; margin-top: 0;">
         <form id="leadForm">
-            <label for="customerName" style="display:block; margin-bottom:5px; font-weight:500;">Your Name</label>
-            <input type="text" id="customerName" required placeholder="John Doe" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit;">
+            <div class="form-group">
+              <label for="customerName">Your Full Name</label>
+              <input type="text" id="customerName" required placeholder="John Doe">
+            </div>
 
-            <label for="customerPhone" style="display:block; margin-bottom:5px; font-weight:500;">Phone Number (WhatsApp Preferred)</label>
-            <input type="tel" id="customerPhone" required placeholder="+91 9876543210" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit;">
+            <div class="form-group">
+              <label for="customerPhone">Phone Number (WhatsApp Preferred)</label>
+              <input type="tel" id="customerPhone" required placeholder="+91 9876543210">
+            </div>
 
-            <label for="city" style="display:block; margin-bottom:5px; font-weight:500;">Select City</label>
-            <select id="city" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit;">
-                <option value="">-- Choose City --</option>
-                <option value="Ahmedabad">Ahmedabad</option>
-                <option value="Surat">Surat</option>
-                <option value="Vadodara">Vadodara</option>
-                <option value="Rajkot">Rajkot</option>
-            </select>
+            <div style="display: flex; gap: 15px;">
+              <div class="form-group" style="flex: 1;">
+                <label for="city">Select City</label>
+                <select id="city" required>
+                    <option value="">-- Choose City --</option>
+                    <option value="Ahmedabad">Ahmedabad</option>
+                    <option value="Surat">Surat</option>
+                    <option value="Vadodara">Vadodara</option>
+                    <option value="Rajkot">Rajkot</option>
+                </select>
+              </div>
 
-            <label for="category" style="display:block; margin-bottom:5px; font-weight:500;">Service Category</label>
-            <select id="category" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit;">
-                <option value="">-- Choose Service --</option>
-                <option value="Website Development">Website Development</option>
-                <option value="Logo Design">Logo Design</option>
-                <option value="Social Media Marketing">Social Media Marketing</option>
-                <option value="College Project Help">College Project Help</option>
-                <option value="Electrician">Electrician</option>
-                <option value="Plumber">Plumber</option>
-            </select>
+              <div class="form-group" style="flex: 1;">
+                <label for="category">Service Category</label>
+                <select id="category" required>
+                    <option value="">-- Choose Service --</option>
+                    <option value="Website Development">Website Development</option>
+                    <option value="Logo Design">Logo Design</option>
+                    <option value="Social Media Marketing">Social Media Marketing</option>
+                    <option value="College Project Help">College Project Help</option>
+                    <option value="Electrician">Electrician</option>
+                    <option value="Plumber">Plumber</option>
+                </select>
+              </div>
+            </div>
 
-            <label for="description" style="display:block; margin-bottom:5px; font-weight:500;">Describe Your Requirement</label>
-            <textarea id="description" required rows="4" placeholder="I need someone to fix the wiring in my house..." style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit; resize: vertical;"></textarea>
+            <div class="form-group">
+              <label for="description">Describe Your Requirement</label>
+              <textarea id="description" required rows="4" placeholder="I need someone to fix the wiring in my house..."></textarea>
+            </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 16px; padding: 12px;" id="submitBtn">Post Request Now</button>
+            <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 16px; padding: 14px; margin-top: 10px;" id="submitBtn">
+              Post Request Now
+            </button>
         </form>
-        <div id="successMsg" style="display: none; margin-top: 20px; color: #2e7d32; text-align: center; font-weight: bold; background: #e8f5e9; padding: 15px; border-radius: 5px;">
-            🎉 Your request has been posted successfully!<br>Local providers will contact you soon.
+        
+        <div id="successMsg" style="display: none; margin-top: 20px; color: var(--success); text-align: center; background: var(--success-bg); padding: 20px; border-radius: var(--radius-md); border: 1px solid rgba(16, 185, 129, 0.2);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom: 10px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <h3 style="margin-bottom: 5px;">Request Posted Successfully!</h3>
+            <p style="font-size: 14px; color: var(--text-dark);">Local providers will contact you soon via your Inbox or WhatsApp.</p>
         </div>
     </div>
   </div>
 
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="container">
+      <div class="grid" style="margin:0; gap: 40px;">
+        <div>
+          <h4 style="font-size: 24px; display: flex; align-items: center; gap: 10px;">
+            <img src="assets/logo.png" style="height: 30px; border-radius: var(--radius-sm);" onerror="this.style.display='none'">
+            CitySetu
+          </h4>
+          <p style="font-size:14px; color: rgba(255,255,255,0.7); max-width: 250px;">
+            India's most trusted local service and lead exchange platform.
+          </p>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="legal.html#about-us">About Us</a>
+          <a href="#">Careers</a>
+          <a href="join.html">Join as Professional</a>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <a href="request-service.html">Post a Request</a>
+          <a href="#">Help Center</a>
+          <a href="mailto:techdhruv181@gmail.com">Contact Us</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="legal.html#terms">Terms of Service</a>
+          <a href="legal.html#privacy-policy">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 CitySetu. All rights reserved. Built for Ahmedabad.
+      </div>
+    </div>
+  </footer>
+
   <script type="module" src="js/auth.js"></script>
   <script type="module" src="js/request-service.js"></script>
+  <script>
+    // Mobile Menu Toggle
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    if(menuBtn) {
+      menuBtn.addEventListener('click', function() {
+        document.getElementById('navLinks').classList.toggle('show');
+      });
+    }
+  </script>
 </body>
 </html>

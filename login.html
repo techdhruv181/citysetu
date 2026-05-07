@@ -6,71 +6,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7983632889924408"
-     crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7983632889924408" crossorigin="anonymous"></script>
 </head>
-<body>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
 
 <header>
   <div class="container">
     <nav>
-      <div class="logo">
-        <img src="assets/logo.png">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="CitySetu Logo" onerror="this.style.display='none'" loading="lazy">
         CitySetu
-      </div>
-      <div class="nav-links">
+      </a>
+
+      <button class="menu-toggle" id="mobileMenuBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+
+      <div class="nav-links" id="navLinks">
         <a href="index.html">Home</a>
+        <a href="join.html">Create Account</a>
       </div>
     </nav>
   </div>
 </header>
 
-<div class="container">
-  <h2 style="margin-top:60px; color: var(--primary-blue); text-align:center;">
-    Login
-  </h2>
+<div class="container" style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 0;">
+  <div class="form-container" style="width: 100%; margin: 0;">
+    <div style="text-align: center; margin-bottom: 30px;">
+      <h2 style="color: var(--primary-blue); font-size: 28px; font-weight: 800; margin-bottom: 10px;">Welcome Back</h2>
+      <p style="color: var(--text-muted); font-size: 15px;">Login to manage your requests or provider dashboard.</p>
+    </div>
 
-  <form id="loginForm">
-    <input type="email" id="email" placeholder="Email Address" required>
-    <input type="password" id="password" placeholder="Password" required>
-    <button type="submit" class="btn btn-primary" style="width:100%;">
-      Login
-    </button>
-  </form>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="you@example.com" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="••••••••" required>
+      </div>
+      <div style="text-align: right; margin-bottom: 20px;">
+        <a href="forgot-password.html" style="color: var(--accent-orange); font-size: 13px; font-weight: 500;">Forgot Password?</a>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%; padding: 14px; font-size: 16px;">
+        Login Securely
+      </button>
+      <div style="text-align: center; margin-top: 20px; font-size: 14px; color: var(--text-muted);">
+        Don't have an account? <a href="join.html" style="color: var(--primary-blue); font-weight: 600;">Sign up</a>
+      </div>
+    </form>
+  </div>
 </div>
 
   <!-- ================= FOOTER ================= -->
-  <footer>
+  <footer style="margin-top: 0;">
     <div class="container">
-      <div class="grid">
-        <div>
-          <h4>CitySetu</h4>
-          <p style="font-size:14px;">
-            Connecting digital experts with customers in your city.
-          </p>
-        </div>
-        <div>
-          <h4>Company</h4>
-          <a href="legal.html#about-us">About Us</a>
-          <a href="#">Careers</a>
-        </div>
-        <div>
-          <h4>Support</h4>
-          <a href="#">Help Center</a>
-          <a href="mailto:techdhruv181@gmail.com">Contact</a>
-        </div>
-        <div>
-          <h4>Legal</h4>
-          <a href="legal.html#terms">Terms</a>
-          <a href="legal.html#privacy-policy">Privacy Policy</a>
-        </div>
-      </div>
-      <div style="margin-top:40px; text-align:center; font-size:14px;">
-        © 2026 CitySetu. All rights reserved.
+      <div class="footer-bottom" style="margin-top: 0; padding-top: 0; border: none;">
+        &copy; 2026 CitySetu. All rights reserved. Built for Ahmedabad.
       </div>
     </div>
   </footer>
 
 <script type="module" src="js/auth.js"></script>
+<script>
+  const menuBtn = document.getElementById('mobileMenuBtn');
+  if(menuBtn) {
+    menuBtn.addEventListener('click', function() {
+      document.getElementById('navLinks').classList.toggle('show');
+    });
+  }
+</script>
 </body>
 </html>

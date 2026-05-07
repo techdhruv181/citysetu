@@ -1,7 +1,8 @@
 import { auth, db } from "./firebase.js";
 
 import {
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
+  sendEmailVerification
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 import {
@@ -58,6 +59,13 @@ form.addEventListener("submit", async (e) => {
 
     const user = userCredential.user;
 
+    // Send verification email
+    try {
+      await sendEmailVerification(user);
+    } catch(e) {
+      console.log("Email verification could not be sent", e);
+    }
+
     // 📦 Save User in Firestore based on role
     if (accountType === "provider") {
       await setDoc(doc(db, "providers", user.uid), {
@@ -75,6 +83,8 @@ form.addEventListener("submit", async (e) => {
         totalJobs: 0,
         completedJobs: 0,
         whatsappClicks: 0,
+        plan: "Free",
+        credits: 25,
         createdAt: new Date()
       });
       alert("Provider Application submitted. Wait for admin approval.");

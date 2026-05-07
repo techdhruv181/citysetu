@@ -2,127 +2,162 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Join as Provider - CitySetu</title>
+  <title>Join CitySetu - Create Account</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7983632889924408"
-     crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7983632889924408" crossorigin="anonymous"></script>
+  <style>
+    .role-toggle { display: flex; background: var(--bg-main); padding: 5px; border-radius: var(--radius-full); margin-bottom: 25px; border: 1px solid var(--border-light); }
+    .role-btn { flex: 1; text-align: center; padding: 10px; font-weight: 600; font-size: 14px; cursor: pointer; border-radius: var(--radius-full); color: var(--text-muted); transition: all var(--transition-fast); }
+    .role-btn.active { background: white; color: var(--primary-blue); box-shadow: var(--shadow-sm); }
+  </style>
 </head>
-<body>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
 
 <header>
   <div class="container">
     <nav>
-      <div class="logo">
-        <img src="assets/logo.png">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="CitySetu Logo" onerror="this.style.display='none'" loading="lazy">
         CitySetu
-      </div>
-      <div class="nav-links">
+      </a>
+
+      <button class="menu-toggle" id="mobileMenuBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+
+      <div class="nav-links" id="navLinks">
         <a href="index.html">Home</a>
-        <a href="categories.html">Browse</a>
+        <a href="login.html">Login Instead</a>
       </div>
     </nav>
   </div>
 </header>
 
-<div class="container">
-
-  <h2 style="margin-top:60px; color: var(--primary-blue); text-align:center;">
-    Create Your CitySetu Account
-  </h2>
- 
-  <form id="joinForm">
-
-    <!-- ACCOUNT TYPE -->
-    <select id="accountType" required>
-      <option value="">Select Account Type</option>
-      <option value="customer">Customer</option>
-      <option value="provider">Service Provider</option>
-    </select>
-
-    <input type="text" id="name" placeholder="Full Name" required>
-    <input type="email" id="email" placeholder="Email Address" required>
-    <input type="text" id="phone" placeholder="Phone Number" required>
-
-    <!-- PROVIDER ONLY FIELDS -->
-    <div id="providerFields" style="display:none;">
-
-      <select id="category" style="width:100%; margin-bottom:20px; padding:12px; border:1px solid #ddd; border-radius:8px;">
-         <option value="">Select Service Category</option>
-         <option value="Website Development">Website Development</option>
-         <option value="Logo Design">Logo Design</option>
-         <option value="Social Media Marketing">Social Media Marketing</option>
-         <option value="College Project Help">College Project Help</option>
-         <option value="AC Repair">AC Repair</option>
-         <option value="Laptop Repair">Laptop Repair</option>
-         <option value="Marketing">Marketing</option>
-         <option value="Other">Other</option>
-      </select>
-
-      <input type="number" id="priceStart" placeholder="Starting Price ₹">
-
+<div class="container" style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 0;">
+  <div class="form-container" style="width: 100%; margin: 0; max-width: 550px;">
+    <div style="text-align: center; margin-bottom: 30px;">
+      <h2 style="color: var(--primary-blue); font-size: 28px; font-weight: 800; margin-bottom: 10px;">Create an Account</h2>
+      <p style="color: var(--text-muted); font-size: 15px;">Join Ahmedabad's fastest-growing local service network.</p>
     </div>
 
-    <input type="password" id="password" placeholder="Create Password" required>
+    <form id="joinForm">
+      
+      <div class="form-group" style="margin-bottom: 10px;">
+        <label>Account Type</label>
+        <select id="accountType" required style="display: none;">
+          <option value="provider">Service Provider</option>
+          <option value="customer">Customer</option>
+        </select>
+        <div class="role-toggle" id="customRoleToggle">
+          <div class="role-btn active" data-val="provider">Service Provider</div>
+          <div class="role-btn" data-val="customer">Customer</div>
+        </div>
+      </div>
 
-    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+      <div style="display: flex; gap: 15px;">
+        <div class="form-group" style="flex: 1;">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="John Doe" required>
+        </div>
+        <div class="form-group" style="flex: 1;">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="+91 9876543210" required>
+        </div>
+      </div>
 
-    <button type="submit" class="btn btn-primary" style="width:100%;">
-      Create Account
-    </button>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="you@example.com" required>
+      </div>
 
-  </form>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Min. 6 characters" required>
+      </div>
 
+      <div id="providerFields">
+        <div style="display: flex; gap: 15px;">
+          <div class="form-group" style="flex: 1;">
+            <label for="city">Select City</label>
+            <select id="city">
+              <option value="Ahmedabad">Ahmedabad</option>
+              <option value="Surat">Surat</option>
+              <option value="Vadodara">Vadodara</option>
+              <option value="Rajkot">Rajkot</option>
+            </select>
+          </div>
+          <div class="form-group" style="flex: 1;">
+            <label for="category">Category</label>
+            <select id="category">
+              <option value="Website Development">Website Development</option>
+              <option value="Logo Design">Logo Design</option>
+              <option value="Social Media Marketing">Social Media Marketing</option>
+              <option value="College Project Help">College Project Help</option>
+              <option value="AC Repair">AC Repair</option>
+              <option value="Laptop Repair">Laptop Repair</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="priceStart">Starting Price (₹)</label>
+          <input type="number" id="priceStart" placeholder="e.g. 500" value="500">
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%; padding: 14px; font-size: 16px; margin-top: 10px;">
+        Create Account
+      </button>
+      
+      <div style="text-align: center; margin-top: 20px; font-size: 14px; color: var(--text-muted);">
+        By signing up, you agree to our <a href="legal.html#terms" style="color: var(--primary-blue);">Terms</a> & <a href="legal.html#privacy-policy" style="color: var(--primary-blue);">Privacy Policy</a>.
+      </div>
+    </form>
+  </div>
 </div>
 
   <!-- ================= FOOTER ================= -->
-  <footer>
+  <footer style="margin-top: 0;">
     <div class="container">
-      <div class="grid">
-        <div>
-          <h4>CitySetu</h4>
-          <p style="font-size:14px;">
-            Connecting digital experts with customers in your city.
-          </p>
-        </div>
-        <div>
-          <h4>Company</h4>
-          <a href="legal.html#about-us">About Us</a>
-          <a href="#">Careers</a>
-        </div>
-        <div>
-          <h4>Support</h4>
-          <a href="#">Help Center</a>
-          <a href="mailto:techdhruv181@gmail.com">Contact</a>
-        </div>
-        <div>
-          <h4>Legal</h4>
-          <a href="legal.html#terms">Terms</a>
-          <a href="legal.html#privacy-policy">Privacy Policy</a>
-        </div>
-      </div>
-      <div style="margin-top:40px; text-align:center; font-size:14px;">
-        © 2026 CitySetu. All rights reserved.
+      <div class="footer-bottom" style="margin-top: 0; padding-top: 0; border: none;">
+        &copy; 2026 CitySetu. All rights reserved. Built for Ahmedabad.
       </div>
     </div>
   </footer>
-<script>
 
-const accountType = document.getElementById("accountType");
-const providerFields = document.getElementById("providerFields");
-
-accountType.addEventListener("change", () => {
-
-  if(accountType.value === "provider"){
-    providerFields.style.display = "block";
-  } else {
-    providerFields.style.display = "none";
-  }
-
-});
-
-</script>
 <script type="module" src="js/join.js"></script>
+<script>
+  // Custom Role Toggle UI binding to the hidden select
+  const roleBtns = document.querySelectorAll('.role-btn');
+  const selectAcc = document.getElementById('accountType');
+  const pFields = document.getElementById('providerFields');
+
+  roleBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      roleBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const val = btn.getAttribute('data-val');
+      selectAcc.value = val;
+      
+      // Dispatch change event so join.js can catch it if needed
+      selectAcc.dispatchEvent(new Event('change'));
+      
+      if(val === 'customer') {
+        pFields.style.display = 'none';
+      } else {
+        pFields.style.display = 'block';
+      }
+    });
+  });
+
+  // Mobile Menu Toggle
+  const menuBtn = document.getElementById('mobileMenuBtn');
+  if(menuBtn) {
+    menuBtn.addEventListener('click', function() {
+      document.getElementById('navLinks').classList.toggle('show');
+    });
+  }
+</script>
 </body>
 </html>

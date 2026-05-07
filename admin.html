@@ -1,86 +1,151 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Admin Dashboard - CitySetu</title>
-    <link rel="stylesheet" href="css/style.css">
-      <!-- ================= FOOTER ================= -->
+  <meta charset="UTF-8">
+  <title>Admin Dashboard - CitySetu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">
+          <img src="assets/logo.png" alt="CitySetu Logo" onerror="this.style.display='none'" loading="lazy">
+          CitySetu Admin
+        </a>
+
+        <button class="menu-toggle" id="mobileMenuBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+
+        <div class="nav-links" id="navLinks">
+          <a href="index.html">Home</a>
+          <!-- Auth links will be injected here by auth.js -->
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container" style="margin-top: 50px; min-height: 70vh;">
+    
+    <!-- LEADS SECTION -->
+    <div class="dashboard-header">
+      <h2 style="display: flex; align-items: center; gap: 10px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary-blue)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        Leads Management
+      </h2>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <label for="leadFilter" style="font-weight: 500; font-size: 14px; color: var(--text-muted);">Filter:</label>
+        <select id="leadFilter" style="width: auto; padding: 8px 16px; border-radius: var(--radius-full);">
+          <option value="All">All Services</option>
+          <option value="Website Development">Website Development</option>
+          <option value="Logo Design">Logo Design</option>
+          <option value="Social Media Marketing">Social Media Marketing</option>
+          <option value="College Project Help">College Project Help</option>
+          <option value="Electrician">Electrician</option>
+          <option value="Plumber">Plumber</option>
+        </select>
+      </div>
+    </div>
+    
+    <div id="leadList" class="grid" style="margin-bottom: 60px;"></div>
+
+    <!-- PROVIDERS SECTION -->
+    <div class="dashboard-header" style="margin-top: 60px;">
+      <h2 style="display: flex; align-items: center; gap: 10px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-orange)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        Provider Approvals
+      </h2>
+      <span id="totalProviders" class="chip chip-contacted" style="font-size: 14px;"></span>
+    </div>
+
+    <div id="adminProviderList" class="grid" style="margin-bottom: 60px;"></div>
+
+    <!-- PLANS SECTION -->
+    <div class="dashboard-header" style="margin-top: 60px;">
+      <h2 style="display: flex; align-items: center; gap: 10px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+        Subscription Plans
+      </h2>
+      <button class="btn btn-primary" id="openAddPlanBtn">Add New Plan</button>
+    </div>
+    
+    <div id="adminPlanList" class="grid" style="margin-bottom: 60px;"></div>
+
+  </div>
+
+  <!-- ================= EDIT PLAN MODAL ================= -->
+  <div id="editPlanModal" class="modal">
+    <div class="modal-content" style="max-width: 400px;">
+      <h3 style="color: var(--primary-blue); font-size: 22px; margin-bottom: 20px;">Edit Provider Plan</h3>
+      <div class="form-group">
+        <label>Plan Name</label>
+        <input type="text" id="editPlanName" placeholder="e.g. Premium">
+      </div>
+      <div class="form-group">
+        <label>Lead Credits</label>
+        <input type="number" id="editPlanCredits" placeholder="e.g. 100">
+      </div>
+      <input type="hidden" id="editPlanProviderId">
+      <div style="display: flex; gap: 15px; margin-top: 25px;">
+        <button id="savePlanBtn" class="btn btn-primary" style="flex: 1;">Save Changes</button>
+        <button onclick="document.getElementById('editPlanModal').style.display='none'" class="btn btn-outline" style="flex: 1;">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PLAN MANAGEMENT MODAL ================= -->
+  <div id="managePlanModal" class="modal">
+    <div class="modal-content" style="max-width: 400px;">
+      <h3 id="managePlanTitle" style="color: var(--primary-blue); font-size: 22px; margin-bottom: 20px;">Add Subscription Plan</h3>
+      <input type="hidden" id="managePlanId">
+      <div class="form-group">
+        <label>Plan Name</label>
+        <input type="text" id="managePlanName" placeholder="e.g. Pro Max">
+      </div>
+      <div class="form-group">
+        <label>Lead Limit (Credits)</label>
+        <input type="number" id="managePlanCredits" placeholder="e.g. 50">
+      </div>
+      <div class="form-group">
+        <label>Duration (Days)</label>
+        <input type="number" id="managePlanDuration" placeholder="e.g. 30">
+      </div>
+      <div class="form-group">
+        <label>Price (₹)</label>
+        <input type="text" id="managePlanPrice" placeholder="e.g. 999">
+      </div>
+      <div style="display: flex; gap: 15px; margin-top: 25px;">
+        <button id="saveGlobalPlanBtn" class="btn btn-primary" style="flex: 1;">Save Plan</button>
+        <button onclick="document.getElementById('managePlanModal').style.display='none'" class="btn btn-outline" style="flex: 1;">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
   <footer>
     <div class="container">
-      <div class="grid">
-        <div>
-          <h4>CitySetu</h4>
-          <p style="font-size:14px;">
-            Connecting digital experts with customers in your city.
-          </p>
-        </div>
-        <div>
-          <h4>Company</h4>
-          <a href="legal.html#about-us">About Us</a>
-          <a href="#">Careers</a>
-        </div>
-        <div>
-          <h4>Support</h4>
-          <a href="#">Help Center</a>
-          <a href="mailto:techdhruv181@gmail.com">Contact</a>
-        </div>
-        <div>
-          <h4>Legal</h4>
-          <a href="legal.html#terms">Terms</a>
-          <a href="legal.html#privacy-policy">Privacy Policy</a>
-        </div>
-      </div>
-      <div style="margin-top:40px; text-align:center; font-size:14px;">
-        © 2026 CitySetu. All rights reserved.
+      <div class="footer-bottom" style="margin-top: 0; padding-top: 0; border: none;">
+        &copy; 2026 CitySetu Admin Portal. All rights reserved.
       </div>
     </div>
   </footer>
-<script type="module" src="js/admin.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7983632889924408"
-     crossorigin="anonymous"></script>
-</head>
 
-<body>
-
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">
-                    <img src="assets/logo.png">
-                    CitySetu Admin
-                </div>
-                <div class="nav-links" id="navLinks">
-                    <a href="index.html">Home</a>
-                </div>
-            </nav>
-        </div>
-    </header>
-
-    <div class="container" style="margin-top:60px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:50px;">
-            <h2>Leads Management</h2>
-            <select id="leadFilter" style="padding:10px; border-radius:5px; border:1px solid #ccc;">
-                <option value="All">All Services</option>
-                <option value="Website Development">Website Development</option>
-                <option value="Logo Design">Logo Design</option>
-                <option value="Social Media Marketing">Social Media Marketing</option>
-                <option value="College Project Help">College Project Help</option>
-                <option value="Electrician">Electrician</option>
-                <option value="Plumber">Plumber</option>
-            </select>
-        </div>
-        <div id="leadList" class="grid" style="margin-bottom: 40px;"></div>
-        <h2 style="color: var(--primary-blue);">
-            Provider Approval Panel
-        </h2>
-
-        <p id="totalProviders"></p>
-
-        <div id="adminProviderList" class="grid"></div>
-    </div>
-    <script type="module" src="js/toast.js"></script>
-    <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/toast.js"></script>
+  <script type="module" src="js/admin.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script>
+    // Mobile Menu Toggle
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    if(menuBtn) {
+      menuBtn.addEventListener('click', function() {
+        document.getElementById('navLinks').classList.toggle('show');
+      });
+    }
+  </script>
 </body>
-
 </html>

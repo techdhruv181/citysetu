@@ -14,6 +14,8 @@ let selectedProvider = null;
 
 
 // LOAD PROVIDERS
+let allProvidersData = [];
+
 async function loadProviders() {
 
   const q = query(
@@ -22,22 +24,45 @@ async function loadProviders() {
   );
 
   const snapshot = await getDocs(q);
+  allProvidersData = snapshot.docs.map(doc => doc.data());
+  
+  renderProviders();
+}
 
-  snapshot.forEach((docSnap) => {
+function renderProviders() {
+  if (!providerList) return;
+  providerList.innerHTML = "";
+  
+  const searchTxt = (document.getElementById("searchInput")?.value || "").toLowerCase();
+  const catVal = document.getElementById("filterCategory")?.value || "All";
 
-    const data = docSnap.data();
+  const filtered = allProvidersData.filter(p => {
+    const matchName = (p.name || "").toLowerCase().includes(searchTxt);
+    const matchCat = catVal === "All" || p.category === catVal;
+    return matchName && matchCat;
+  });
+
+  if (filtered.length === 0) {
+    providerList.innerHTML = "<p style='text-align:center; grid-column:1/-1; color:var(--text-muted); padding:40px;'>No providers found matching your criteria.</p>";
+    return;
+  }
+
+  filtered.forEach((data) => {
 
     const card = document.createElement("div");
     card.classList.add("card");
 
     card.innerHTML = `
-<h3>${data.name}</h3>
-<p>Category: ${data.category}</p>
-<p>Starting From ₹${data.priceStart}</p>
+<div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+  <h3 style="margin-bottom: 0;">${data.name}</h3>
+  <span class="chip chip-new" style="background: #e0f2fe; color: #0284c7; font-size: 11px;">Verified</span>
+</div>
+<p style="margin-bottom: 8px;"><strong>Category:</strong> ${data.category}</p>
+<p style="margin-bottom: 15px; color: var(--primary-blue); font-weight: 600; font-size: 16px;">Starting From ₹${data.priceStart}</p>
 
-<div style="margin-top:15px;">
-<button class="btn btn-primary book-btn">Book Now</button>
-<button class="btn btn-orange whatsapp-btn">WhatsApp</button>
+<div style="margin-top:auto; display: flex; gap: 10px;">
+  <button class="btn btn-primary book-btn" style="flex: 1; padding: 10px;">Book</button>
+  <button class="btn btn-orange whatsapp-btn" style="flex: 1; padding: 10px; background: #25D366; box-shadow: 0 4px 14px 0 rgba(37, 211, 102, 0.25);">WhatsApp</button>
 </div>
 `;
 
@@ -72,21 +97,20 @@ async function loadProviders() {
 
       const city = localStorage.getItem("city") || "";
 
-      await addDoc(collection(db, "whatsappClicks"), {
+      try {
+        await addDoc(collection(db, "whatsappClicks"), {
+          providerUid: data.uid,
+          providerName: data.name,
+          customerUid: auth.currentUser.uid,
+          customerEmail: auth.currentUser.email,
+          city: city,
+          createdAt: new Date()
+        });
+      } catch (error) {
+        console.log("Could not track click (rules restriction):", error.message);
+      }
 
-        providerUid: data.uid,
-        providerName: data.name,
-
-        customerUid: auth.currentUser.uid,
-        customerEmail: auth.currentUser.email,
-
-        city: city,
-
-        createdAt: new Date()
-
-      });
-
-      window.location.href = `https://wa.me/${data.phone}`;
+      window.open(`https://wa.me/${data.phone}`, "_blank");
 
     });
 
@@ -95,6 +119,9 @@ async function loadProviders() {
   });
 
 }
+
+document.getElementById("searchInput")?.addEventListener("input", renderProviders);
+document.getElementById("filterCategory")?.addEventListener("change", renderProviders);
 
 
 // CONFIRM BOOKING

@@ -1,6 +1,10 @@
 User-agent: *
 Disallow: /admin.html
 Disallow: /provider-dashboard.html
+Disallow: /customer-dashboard.html
 Disallow: /profile.html
+Disallow: /login.html
+Disallow: /forgot-password.html
+Disallow: /join.html
 
 Sitemap: https://citysetu.in/sitemap.xml

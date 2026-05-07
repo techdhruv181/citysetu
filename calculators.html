@@ -2,145 +2,119 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Free Online Financial & Math Calculators India - CitySetu</title>
-  <meta name="description" content="Use our free, fast, and accurate online calculators in India for SIP, EMI, GST, Interest, Discounts, and more. Calculate instantly without page reloads.">
+  <title>Free Financial Calculators - CitySetu</title>
+  <meta name="description" content="Use free financial tools like EMI, SIP, GST, and Discount calculators online.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <style>
-    .calc-card { text-align:center; padding:30px 20px; transition:0.3s; background:white; border-radius:16px; box-shadow:0 8px 20px rgba(0,0,0,0.05); text-decoration:none; display:block; color:inherit; }
-    .calc-card:hover { transform:translateY(-5px); box-shadow:0 12px 25px rgba(0,0,0,0.08); border:1px solid var(--accent-orange); }
-    .calc-icon { font-size:40px; margin-bottom:15px; }
-  </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7983632889924408" crossorigin="anonymous"></script>
-  <link rel="canonical" href="https://citysetu.in/calculators.html">
-  <script type="application/ld+json">
-  {
-   "@context": "https://schema.org",
-   "@type": "CollectionPage",
-   "name": "Free Online Calculators India",
-   "url": "https://citysetu.in/calculators.html",
-   "description": "Collection of free online financial and math calculators for Indian users."
-  }
-  </script>
 </head>
-<body>
-  <header>
-    <div class="container">
-      <nav>
-        <div class="logo">
-          <img src="assets/logo.png" alt="CitySetu Logo - Free Online Calculators" onerror="this.style.display='none'" loading="lazy">
-          <a href="index.html" style="text-decoration:none; color:inherit;">CitySetu</a>
-        </div>
-        <div class="nav-links">
-          <a href="index.html">Home</a>
-          <a href="categories.html">Services</a>
-          <a href="calculators.html" style="color:var(--accent-orange); font-weight:600;">Calculators</a>
-        </div>
-      </nav>
-    </div>
-  </header>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
 
-  <div class="container" style="margin-top:60px; min-height:60vh;">
-    <div style="text-align:center; margin-bottom:40px;">
-      <h1 style="color:var(--primary-blue); font-size:36px; margin-bottom:10px;">Free Online Financial & Math Calculators India</h1>
-      <p style="color:#555; font-size:16px; max-width:800px; margin:auto;">Free, instant, and accurate calculations to help you manage your finances, loans, and business metrics effortlessly. Explore our top tools below.</p>
-    </div>
-
-    <!-- Top AdSense Banner Placeholder -->
-    <div style="width:100%; height:90px; background:#e0e0e0; margin-bottom:40px; display:flex; align-items:center; justify-content:center; color:#888; border-radius:8px;">
-       [ AdSense Banner Placeholder - Top ]
-    </div>
-
-    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
-      
-      <a href="sip-calculator.html" class="calc-card">
-        <div class="calc-icon">📈</div>
-        <h3 style="color:var(--primary-blue); margin-bottom:10px;">SIP Calculator</h3>
-        <p style="font-size:13px; color:#666; margin-bottom:15px;">Calculate the future value of your monthly mutual fund investments.</p>
-        <div class="btn btn-primary" style="display:inline-block; padding:8px 16px; font-size:14px;">Open Calculator</div>
+<header>
+  <div class="container">
+    <nav>
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="CitySetu Logo" onerror="this.style.display='none'" loading="lazy">
+        CitySetu
       </a>
 
-      <a href="emi-calculator.html" class="calc-card">
-        <div class="calc-icon">🏦</div>
-        <h3 style="color:var(--primary-blue); margin-bottom:10px;">EMI Calculator</h3>
-        <p style="font-size:13px; color:#666; margin-bottom:15px;">Plan your home, car, or personal loan monthly EMIs instantly.</p>
-        <div class="btn btn-primary" style="display:inline-block; padding:8px 16px; font-size:14px;">Open Calculator</div>
-      </a>
+      <button class="menu-toggle" id="mobileMenuBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
 
-      <a href="interest-calculator.html" class="calc-card">
-        <div class="calc-icon">💰</div>
-        <h3 style="color:var(--primary-blue); margin-bottom:10px;">Interest Calculator</h3>
-        <p style="font-size:13px; color:#666; margin-bottom:15px;">Compute Simple and Compound interest easily over specific tenures.</p>
-        <div class="btn btn-primary" style="display:inline-block; padding:8px 16px; font-size:14px;">Open Calculator</div>
-      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="categories.html">Services</a>
+      </div>
+    </nav>
+  </div>
+</header>
 
-      <a href="gst-calculator.html" class="calc-card">
-        <div class="calc-icon">🧾</div>
-        <h3 style="color:var(--primary-blue); margin-bottom:10px;">GST Calculator</h3>
-        <p style="font-size:13px; color:#666; margin-bottom:15px;">Quickly add or figure out the exact GST tax limits internally for billing.</p>
-        <div class="btn btn-primary" style="display:inline-block; padding:8px 16px; font-size:14px;">Open Calculator</div>
-      </a>
-
-      <a href="discount-calculator.html" class="calc-card">
-        <div class="calc-icon">🏷️</div>
-        <h3 style="color:var(--primary-blue); margin-bottom:10px;">Discount Calculator</h3>
-        <p style="font-size:13px; color:#666; margin-bottom:15px;">Find out exactly how much you can save during major shopping sales.</p>
-        <div class="btn btn-primary" style="display:inline-block; padding:8px 16px; font-size:14px;">Open Calculator</div>
-      </a>
-
-      <a href="percentage-calculator.html" class="calc-card">
-        <div class="calc-icon">📊</div>
-        <h3 style="color:var(--primary-blue); margin-bottom:10px;">Percentage Calculator</h3>
-        <p style="font-size:13px; color:#666; margin-bottom:15px;">Solve tricky percentage problems in seconds with detailed results.</p>
-        <div class="btn btn-primary" style="display:inline-block; padding:8px 16px; font-size:14px;">Open Calculator</div>
-      </a>
-
-      <a href="profit-calculator.html" class="calc-card">
-        <div class="calc-icon">💼</div>
-        <h3 style="color:var(--primary-blue); margin-bottom:10px;">Profit Margin Calculator</h3>
-        <p style="font-size:13px; color:#666; margin-bottom:15px;">Assess and evaluate product costs and gross margins for your business.</p>
-        <div class="btn btn-primary" style="display:inline-block; padding:8px 16px; font-size:14px;">Open Calculator</div>
-      </a>
-
-    </div>
-
-    <!-- Bottom AdSense Banner Placeholder -->
-    <div style="width:100%; height:90px; background:#e0e0e0; margin-top:40px; display:flex; align-items:center; justify-content:center; color:#888; border-radius:8px;">
-       [ AdSense Banner Placeholder - Bottom ]
-    </div>
+<div class="container" style="flex: 1; padding: 40px 0;">
+  
+  <div style="text-align: center; margin-bottom: 50px;">
+    <h1 style="color: var(--primary-blue); font-size: 32px; font-weight: 800; margin-bottom: 10px;">Free Financial Tools</h1>
+    <p style="color: var(--text-muted); font-size: 16px;">Calculate EMI, SIP, GST, and more instantly.</p>
   </div>
 
-    <!-- ================= FOOTER ================= -->
-  <footer>
+  <div class="grid">
+    <a href="sip-calculator.html" class="card" style="text-align: center; display: block;">
+      <h3 style="margin-bottom: 10px;">📈 SIP Calculator</h3>
+      <p>Calculate your mutual fund returns</p>
+    </a>
+    <a href="emi-calculator.html" class="card" style="text-align: center; display: block;">
+      <h3 style="margin-bottom: 10px;">🏠 EMI Calculator</h3>
+      <p>Calculate home, car, or personal loan EMI</p>
+    </a>
+    <a href="gst-calculator.html" class="card" style="text-align: center; display: block;">
+      <h3 style="margin-bottom: 10px;">🧾 GST Calculator</h3>
+      <p>Add or remove GST from prices</p>
+    </a>
+    <a href="interest-calculator.html" class="card" style="text-align: center; display: block;">
+      <h3 style="margin-bottom: 10px;">💰 Interest Calculator</h3>
+      <p>Simple & Compound Interest</p>
+    </a>
+    <a href="discount-calculator.html" class="card" style="text-align: center; display: block;">
+      <h3 style="margin-bottom: 10px;">🏷️ Discount Calculator</h3>
+      <p>Find the final price after discount</p>
+    </a>
+    <a href="percentage-calculator.html" class="card" style="text-align: center; display: block;">
+      <h3 style="margin-bottom: 10px;">📊 Percentage Calculator</h3>
+      <p>Calculate percentage changes easily</p>
+    </a>
+    <a href="profit-calculator.html" class="card" style="text-align: center; display: block;">
+      <h3 style="margin-bottom: 10px;">💼 Profit Margin</h3>
+      <p>Calculate gross and net profit margins</p>
+    </a>
+  </div>
+</div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer style="margin-top: 0;">
     <div class="container">
-      <div class="grid">
+      <div class="grid" style="margin:0; gap: 40px;">
         <div>
-          <h4>CitySetu</h4>
-          <p style="font-size:14px;">
-            Connecting digital experts with customers in your city.
+          <h4 style="font-size: 24px; display: flex; align-items: center; gap: 10px;">
+            <img src="assets/logo.png" style="height: 30px; border-radius: var(--radius-sm);" onerror="this.style.display='none'">
+            CitySetu
+          </h4>
+          <p style="font-size:14px; color: rgba(255,255,255,0.7); max-width: 250px;">
+            India's most trusted local service and lead exchange platform.
           </p>
         </div>
         <div>
           <h4>Company</h4>
           <a href="legal.html#about-us">About Us</a>
           <a href="#">Careers</a>
+          <a href="join.html">Join as Professional</a>
         </div>
         <div>
           <h4>Support</h4>
+          <a href="request-service.html">Post a Request</a>
           <a href="#">Help Center</a>
-          <a href="mailto:techdhruv181@gmail.com">Contact</a>
+          <a href="mailto:techdhruv181@gmail.com">Contact Us</a>
         </div>
         <div>
           <h4>Legal</h4>
-          <a href="legal.html#terms">Terms</a>
+          <a href="legal.html#terms">Terms of Service</a>
           <a href="legal.html#privacy-policy">Privacy Policy</a>
         </div>
       </div>
-      <div style="margin-top:40px; text-align:center; font-size:14px;">
-        © 2026 CitySetu. All rights reserved.
+      <div class="footer-bottom">
+        &copy; 2026 CitySetu. All rights reserved. Built for Ahmedabad.
       </div>
     </div>
   </footer>
+
+<script type="module" src="js/auth.js"></script>
+<script>
+  const menuBtn = document.getElementById('mobileMenuBtn');
+  if(menuBtn) {
+    menuBtn.addEventListener('click', function() {
+      document.getElementById('navLinks').classList.toggle('show');
+    });
+  }
+</script>
 </body>
 </html>

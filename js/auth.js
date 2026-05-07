@@ -114,15 +114,23 @@ onAuthStateChanged(auth, async (user) => {
 
   }
 
-  // PROVIDER LOGIN
+  // PROVIDER OR CUSTOMER LOGIN
   else {
-
-    nav.innerHTML += `
+    const qNav = query(collection(db, "providers"), where("uid", "==", user.uid));
+    const snapNav = await getDocs(qNav);
+    
+    if (!snapNav.empty) {
+      nav.innerHTML += `
 <a href="provider-dashboard.html">Dashboard</a>
 <a href="profile.html">Profile</a>
 <a href="#" id="logoutBtn">Logout</a>
 `;
-
+    } else {
+      nav.innerHTML += `
+<a href="customer-dashboard.html">Dashboard</a>
+<a href="#" id="logoutBtn">Logout</a>
+`;
+    }
   }
 
   // Logout button

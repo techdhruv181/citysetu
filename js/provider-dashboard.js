@@ -37,6 +37,8 @@ let currentChatLeadId = null;
 let providerDocId;
 let providerCategoryVal = "";
 let currentUid = "";
+let currentProviderCredits = 0;
+
 // LOAD PROFILE
 async function loadProfile(uid) {
 
@@ -53,11 +55,17 @@ async function loadProfile(uid) {
   const data = docSnap.data();
 
   providerDocId = docSnap.id;
+  currentProviderCredits = data.credits || 0;
 
   document.getElementById("providerName").value = data.name || "";
   document.getElementById("providerPhone").value = data.phone || "";
   document.getElementById("providerPrice").value = data.priceStart || "";
   document.getElementById("providerCategory").value = data.category || "";
+
+  const statCredits = document.getElementById("statCredits");
+  const statPlan = document.getElementById("statPlan");
+  if (statCredits) statCredits.innerText = currentProviderCredits;
+  if (statPlan) statPlan.innerText = data.plan || "Free";
   providerCategoryVal = data.category || "";
 
 }
@@ -75,7 +83,7 @@ async function loadTasks(uid) {
 
   onSnapshot(q, (snapshot) => {
     taskList.innerHTML = "";
-    if(availableList) availableList.innerHTML = "";
+    if (availableList) availableList.innerHTML = "";
 
     let assignedCount = 0;
     let availableCount = 0;
@@ -87,8 +95,8 @@ async function loadTasks(uid) {
 
       // Completed check
       if (data.status === "completed") {
-         completedCount++;
-         if (data.assignedTo !== uid) return; // Don't show completed if not assigned to us
+        completedCount++;
+        if (data.assignedTo !== uid) return; // Don't show completed if not assigned to us
       }
 
       // Hide active tasks assigned explicitly to another provider
@@ -103,47 +111,57 @@ async function loadTasks(uid) {
       card.classList.add("task-card");
 
       card.innerHTML = `
-        <h3>${data.name}</h3>
-        <p><strong>Phone:</strong> <span style="letter-spacing: 2px;">+91 9X XXXX XXXX</span> <em style="font-size:12px; color:#888;">(Reveals via WhatsApp)</em></p>
-        <p><strong>Requirement:</strong> ${data.description}</p>
-        <p><strong>Location:</strong> ${data.location}</p>
-        <div style="margin-top:5px; margin-bottom:15px;">
-           <span class="chip chip-${data.status}">${data.status}</span>
-           ${isMine ? `<span class="chip" style="background:#10B981; color:#fff;">Assigned to You</span>` : `<span class="chip chip-new">Broadcasted</span>`}
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+          <h3 style="margin-bottom: 0;">${data.name}</h3>
+          <span class="chip chip-${data.status}">${data.status.toUpperCase()}</span>
         </div>
+        <p><strong>Phone:</strong> <span style="letter-spacing: 2px;">+91 9X XXXX XXXX</span> <em style="font-size:12px; color:var(--text-muted);">(Reveals via WhatsApp)</em></p>
+        <p style="background: var(--bg-main); padding: 10px; border-radius: 6px; margin: 10px 0; font-size: 14px;"><strong>Req:</strong> ${data.description}</p>
+        <p style="margin-bottom: 15px;"><strong>Location:</strong> ${data.location}</p>
 
-        <div style="margin-top:15px; display:flex; gap:10px; flex-wrap:wrap;">
-        <button class="btn whatsapp-btn" data-url="https://wa.me/${data.phone.replace(/[^0-9]/g, '')}?text=Hi%20${encodeURIComponent(data.name)},%20I%20am%20reaching%20out%20from%20CitySetu%20regarding%20your%20${encodeURIComponent(data.service)}%20request." style="background:#25D366; color:white; border:none; cursor:pointer;">🟢 Premium WhatsApp</button>
-        <button class="btn internal-chat-btn" data-id="${id}" data-name="${data.name}" style="background:#1E2A78; color:white; border:none; cursor:pointer;">💬 Free Chat</button>
-        ${data.status === 'new' || data.status === 'contacted' ? `<button class="btn btn-primary contact-btn">Mark Contacted</button>` : ''}
-        ${isMine && data.status !== 'completed' ? `<button class="btn btn-orange finish-btn">Mark Completed</button>` : ''}
+        <div style="margin-top:auto; display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn whatsapp-btn" data-url="https://wa.me/${data.phone.replace(/[^0-9]/g, '')}?text=Hi%20${encodeURIComponent(data.name)},%20I%20am%20reaching%20out%20from%20CitySetu%20regarding%20your%20${encodeURIComponent(data.service)}%20request." style="flex:1; padding:10px; background:#25D366; color:white; border:none; cursor:pointer; box-shadow: 0 4px 14px 0 rgba(37, 211, 102, 0.25);">WhatsApp</button>
+        <button class="btn internal-chat-btn" data-id="${id}" data-name="${data.name}" style="flex:1; padding:10px; background:var(--primary-blue); color:white; border:none; cursor:pointer; box-shadow: 0 4px 14px 0 rgba(30, 42, 120, 0.25);">Free Chat</button>
+        ${data.status === 'new' || data.status === 'contacted' ? `<button class="btn btn-outline contact-btn" style="width: 100%; padding: 8px;">Mark Contacted</button>` : ''}
+        ${isMine && data.status !== 'completed' ? `<button class="btn btn-outline finish-btn" style="width: 100%; padding: 8px;">Mark Completed</button>` : ''}
         </div>
       `;
 
       // WHATSAPP BUTTON (TRACK CLICKS)
       const waBtn = card.querySelector(".whatsapp-btn");
       if (waBtn) {
-         waBtn.addEventListener("click", async () => {
-           try {
-             // 1. Track click on Provider profile
-             await updateDoc(doc(db, "providers", uid), {
-               whatsappClicks: increment(1)
-             });
-             // 2. Open WhatsApp link
-             window.open(waBtn.getAttribute("data-url"), "_blank");
-           } catch(e) {
-             console.error("Tracking Error:", e);
-             window.open(waBtn.getAttribute("data-url"), "_blank");
-           }
-         });
+        waBtn.addEventListener("click", async () => {
+          if (currentProviderCredits <= 0) {
+            alert("Insufficient Lead Credits! Please contact admin to upgrade your plan.");
+            return;
+          }
+
+          try {
+            // 1. Track click on Provider profile
+            await updateDoc(doc(db, "providers", providerDocId), {
+              whatsappClicks: increment(1),
+              credits: increment(-1)
+            });
+
+            currentProviderCredits--;
+            const statCredits = document.getElementById("statCredits");
+            if (statCredits) statCredits.innerText = currentProviderCredits;
+
+            // 2. Open WhatsApp link
+            window.open(waBtn.getAttribute("data-url"), "_blank");
+          } catch (e) {
+            console.error("Tracking Error:", e);
+            alert("Error connecting to server. Make sure you have credits.");
+          }
+        });
       }
 
       // OPEN INTERNAL CHAT
       const chatBtn = card.querySelector(".internal-chat-btn");
       if (chatBtn) {
-         chatBtn.addEventListener("click", () => {
-            openInternalChat(chatBtn.getAttribute("data-id"), chatBtn.getAttribute("data-name"));
-         });
+        chatBtn.addEventListener("click", () => {
+          openInternalChat(chatBtn.getAttribute("data-id"), chatBtn.getAttribute("data-name"));
+        });
       }
 
       // CONTACT BUTTON
@@ -154,29 +172,29 @@ async function loadTasks(uid) {
             status: "contacted",
             assignedTo: data.assignedTo || uid // Auto-assign to self if it was broadcasted
           });
-          if(window.showToast) window.showToast("Lead Marked Contacted & Locked to You!");
+          if (window.showToast) window.showToast("Lead Marked Contacted & Locked to You!");
         });
       }
 
       // FINISH BUTTON
       const finishBtn = card.querySelector(".finish-btn");
       if (finishBtn) {
-         finishBtn.addEventListener("click", async () => {
-           await updateDoc(doc(db, "leads", id), { status: "completed" });
-           if(window.showToast) window.showToast("Job Completed");
-         });
+        finishBtn.addEventListener("click", async () => {
+          await updateDoc(doc(db, "leads", id), { status: "completed" });
+          if (window.showToast) window.showToast("Job Completed");
+        });
       }
 
       if (isMine || data.status === "completed") {
-         taskList.appendChild(card);
+        taskList.appendChild(card);
       } else {
-         if(availableList) availableList.appendChild(card);
+        if (availableList) availableList.appendChild(card);
       }
     });
 
-    if(statAvailable) statAvailable.innerText = availableCount;
-    if(statAssigned) statAssigned.innerText = assignedCount;
-    if(statCompleted) statCompleted.innerText = completedCount;
+    if (statAvailable) statAvailable.innerText = availableCount;
+    if (statAssigned) statAssigned.innerText = assignedCount;
+    if (statCompleted) statCompleted.innerText = completedCount;
   });
 }
 
@@ -198,14 +216,14 @@ if (internalChatSend) {
     if (!text || !currentChatLeadId) return;
 
     internalChatInput.value = "";
-    
+
     // Auto-Delete logic payload (TTL)
     const expireAt = new Date();
     expireAt.setHours(expireAt.getHours() + 24);
 
     await addDoc(collection(db, "messages"), {
       leadId: currentChatLeadId,
-      senderId: currentUid, 
+      senderId: currentUid,
       text: text,
       timestamp: serverTimestamp(),
       expireAt: expireAt
@@ -229,8 +247,8 @@ function openInternalChat(leadId, leadName) {
   currentChatUnsubscribe = onSnapshot(q, (snapshot) => {
     internalChatBody.innerHTML = "";
     if (snapshot.empty) {
-       internalChatBody.innerHTML = `<div style="text-align:center; color:#888; margin-top:20px;">No messages yet. Send the first message!</div>`;
-       return;
+      internalChatBody.innerHTML = `<div style="text-align:center; color:#888; margin-top:20px;">No messages yet. Send the first message!</div>`;
+      return;
     }
 
     let messages = [];
@@ -239,7 +257,7 @@ function openInternalChat(leadId, leadName) {
 
     messages.forEach((msg) => {
       const div = document.createElement("div");
-      
+
       div.className = msg.senderId === currentUid ? "internal-msg mine" : "internal-msg other";
       div.innerText = msg.text;
       internalChatBody.appendChild(div);
@@ -279,10 +297,50 @@ onAuthStateChanged(auth, async (user) => {
     window.location.href = "login.html";
     return;
   }
-  
+
   currentUid = user.uid;
 
   await loadProfile(user.uid);
   loadTasks(user.uid);
+  loadProviderPlans();
 
 });
+
+// ================= LOAD SUBSCRIPTION PLANS =================
+const providerPlanList = document.getElementById("providerPlanList");
+
+async function loadProviderPlans() {
+  if (!providerPlanList) return;
+  const q = query(collection(db, "plans"), orderBy("credits", "asc"));
+  onSnapshot(q, (snapshot) => {
+    providerPlanList.innerHTML = "";
+
+    if (snapshot.empty) {
+      providerPlanList.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--text-muted); padding:20px;">No plans currently available.</p>`;
+      return;
+    }
+
+    snapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      const card = document.createElement("div");
+      card.classList.add("card");
+      card.style.textAlign = "center";
+
+      card.innerHTML = `
+        <h3 style="color:var(--primary-blue); font-size:24px; margin-bottom:5px;">${data.name}</h3>
+        <p style="color:var(--accent-orange); font-size:32px; font-weight:800; margin-bottom:15px;">${data.price}</p>
+        <p style="margin-bottom:10px; font-size:16px;"><strong>Lead Credits:</strong> <span style="font-size:18px; font-weight:600; color:var(--success);">${data.credits}</span></p>
+        <p style="margin-bottom:20px; font-size:16px;"><strong>Validity:</strong> ${data.durationDays} Days</p>
+        <button class="btn btn-primary subscribe-btn" style="width:100%; padding:12px; font-size:16px;">Subscribe Now</button>
+      `;
+
+      card.querySelector(".subscribe-btn").addEventListener("click", () => {
+        const message = encodeURIComponent(`Hi Admin, I am interested in subscribing to the "${data.name}" plan for my CitySetu Provider Account.`);
+        const adminNumber = "916351541231";
+        window.open(`https://wa.me/${adminNumber}?text=${message}`, "_blank");
+      });
+
+      providerPlanList.appendChild(card);
+    });
+  });
+}

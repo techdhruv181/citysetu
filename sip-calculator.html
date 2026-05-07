@@ -1,18 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Free SIP Calculator India 2026 - Mutual Fund Returns</title>
-  <meta name="description" content="Calculate your Systematic Investment Plan (SIP) returns instantly. Plan your wealth creation with our free, fast SIP mutual fund calculator India.">
+  <meta name="description"
+    content="Calculate your Systematic Investment Plan (SIP) returns instantly. Plan your wealth creation with our free, fast SIP mutual fund calculator India.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    .result-box { display:none; background:#e8f5e9; border:1px solid #4caf50; padding:20px; border-radius:8px; margin-top:20px; text-align:center; }
-    .result-box h3 { color:#2e7d32; font-size:24px; margin-bottom:5px; }
-    .result-box p { font-size:16px; color:#333; margin-bottom:5px; }
+    .result-box {
+      display: none;
+      background: #e8f5e9;
+      border: 1px solid #4caf50;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .result-box h3 {
+      color: #2e7d32;
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .result-box p {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 5px;
+    }
   </style>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7983632889924408" crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7983632889924408"
+    crossorigin="anonymous"></script>
   <link rel="canonical" href="https://citysetu.in/sip-calculator.html">
   <script type="application/ld+json">
   {
@@ -25,12 +46,14 @@
   }
   </script>
 </head>
+
 <body>
   <header>
     <div class="container">
       <nav>
         <div class="logo">
-          <img src="assets/logo.png" alt="CitySetu Logo - SIP Calculator" onerror="this.style.display='none'" loading="lazy">
+          <img src="assets/logo.png" alt="CitySetu Logo - SIP Calculator" onerror="this.style.display='none'"
+            loading="lazy">
           <a href="index.html" style="text-decoration:none; color:inherit;">CitySetu</a>
         </div>
         <div class="nav-links">
@@ -43,87 +66,92 @@
   </header>
 
   <div class="container" style="margin-top:40px; margin-bottom:60px;">
-    
+
     <!-- Top AdSense Banner -->
-    <div style="width:100%; height:90px; background:#e0e0e0; margin-bottom:30px; display:flex; align-items:center; justify-content:center; color:#888; border-radius:8px;">
-       [ AdSense Banner Placeholder - Top ]
+    <div
+      style="width:100%; height:90px; background:#e0e0e0; margin-bottom:30px; display:flex; align-items:center; justify-content:center; color:#888; border-radius:8px;">
+      [ AdSense Banner Placeholder - Top ]
     </div>
 
     <div style="max-width:800px; margin:auto;">
-      <h1 style="color:var(--primary-blue); font-size:32px; text-align:center; margin-bottom:10px;">Free Online SIP Calculator India</h1>
-      <p style="text-align:center; color:#666; margin-bottom:30px;">Calculate the future value of your monthly mutual fund investments instantly. Systematic Investment Plans (SIP) are a great way to build wealth in India. Use this free tool to estimate your returns.</p>
+      <h1 style="color:var(--primary-blue); font-size:32px; text-align:center; margin-bottom:10px;">Free Online SIP
+        Calculator India</h1>
+      <p style="text-align:center; color:#666; margin-bottom:30px;">Calculate the future value of your monthly mutual
+        fund investments instantly. Systematic Investment Plans (SIP) are a great way to build wealth in India. Use this
+        free tool to estimate your returns.</p>
 
       <div class="card" style="padding:30px; max-width:600px; margin:auto;">
-        <label for="monthlyInv" style="font-weight:500; display:block; margin-bottom:8px;">Monthly Investment (₹)</label>
-        <input type="number" id="monthlyInv" placeholder="e.g. 5000" style="width:100%; padding:12px; margin-bottom:20px; border:1px solid #ddd; border-radius:8px;">
+        <label for="monthlyInv" style="font-weight:500; display:block; margin-bottom:8px;">Monthly Investment
+          (₹)</label>
+        <input type="number" id="monthlyInv" placeholder="e.g. 5000"
+          style="width:100%; padding:12px; margin-bottom:20px; border:1px solid #ddd; border-radius:8px;">
 
-        <label for="rate" style="font-weight:500; display:block; margin-bottom:8px;">Expected Return Rate (p.a %)</label>
-        <input type="number" id="rate" placeholder="e.g. 12" style="width:100%; padding:12px; margin-bottom:20px; border:1px solid #ddd; border-radius:8px;">
+        <label for="rate" style="font-weight:500; display:block; margin-bottom:8px;">Expected Return Rate (p.a
+          %)</label>
+        <input type="number" id="rate" placeholder="e.g. 12"
+          style="width:100%; padding:12px; margin-bottom:20px; border:1px solid #ddd; border-radius:8px;">
 
         <label for="years" style="font-weight:500; display:block; margin-bottom:8px;">Time Period (Years)</label>
-        <input type="number" id="years" placeholder="e.g. 10" style="width:100%; padding:12px; margin-bottom:20px; border:1px solid #ddd; border-radius:8px;">
+        <input type="number" id="years" placeholder="e.g. 10"
+          style="width:100%; padding:12px; margin-bottom:20px; border:1px solid #ddd; border-radius:8px;">
 
         <button id="calcBtn" class="btn btn-primary" style="width:100%; font-size:16px;">Calculate SIP</button>
 
         <div id="resultBox" class="result-box">
-           <p>Invested Amount: <strong id="resInvested"></strong></p>
-           <p>Est. Returns: <strong id="resEstReturns"></strong></p>
-           <h3>Total Value: <span id="resTotal"></span></h3>
+          <p>Invested Amount: <strong id="resInvested"></strong></p>
+          <p>Est. Returns: <strong id="resEstReturns"></strong></p>
+          <h3>Total Value: <span id="resTotal"></span></h3>
         </div>
       </div>
+    </div>
+
+    <!-- SEO & AdSense High-Value Content Section -->
+    <div style="max-width:800px; margin:40px auto; color: var(--text-dark); line-height: 1.8;">
+        <h2 style="color:var(--primary-blue); font-size: 24px; margin-bottom: 15px;">What is a SIP?</h2>
+        <p style="margin-bottom: 15px;">A Systematic Investment Plan (SIP) is a disciplined way of investing in mutual funds. It allows investors to allocate a fixed amount of money at regular intervals (such as monthly or quarterly) into a mutual fund scheme. This approach helps in mitigating market volatility through rupee-cost averaging and builds significant wealth over the long term thanks to the power of compounding.</p>
+        
+        <h2 style="color:var(--primary-blue); font-size: 24px; margin-bottom: 15px;">How does our SIP Calculator work?</h2>
+        <p style="margin-bottom: 15px;">Our free SIP calculator uses the standard compound interest formula to project the future value of your investments. The formula generally used is: <strong>FV = P × ({[1 + i]^n - 1} / i) × (1 + i)</strong></p>
+        <ul style="margin-bottom: 20px; margin-left: 20px;">
+            <li><strong>FV</strong> is the Future Value of the investment.</li>
+            <li><strong>P</strong> is the fixed Monthly Investment amount.</li>
+            <li><strong>i</strong> is the expected monthly return rate (annual rate divided by 12).</li>
+            <li><strong>n</strong> is the total number of months you will be investing.</li>
+        </ul>
+        
+        <h2 style="color:var(--primary-blue); font-size: 24px; margin-bottom: 15px;">Benefits of Investing via SIP</h2>
+        <p style="margin-bottom: 15px;">Investing through a Systematic Investment Plan offers several advantages. First, it instills financial discipline, requiring you to save a specific amount regularly. Second, it leverages rupee-cost averaging, meaning you buy more mutual fund units when the market is low and fewer when the market is high, ultimately lowering your average cost per unit. Lastly, the power of compounding ensures that even small investments made consistently over a 10 to 20-year period can grow into a massive financial corpus. Start your investment journey today and use our SIP calculator to plan your financial goals accurately.</p>
     </div>
 
     <!-- Middle AdSense Banner -->
-    <div style="width:100%; height:90px; background:#e0e0e0; margin:40px 0; display:flex; align-items:center; justify-content:center; color:#888; border-radius:8px;">
-       [ AdSense Banner Placeholder - Middle ]
+    <div
+      style="width:100%; height:90px; background:#e0e0e0; margin:40px 0; display:flex; align-items:center; justify-content:center; color:#888; border-radius:8px;">
+      [ AdSense Banner Placeholder - Middle ]
     </div>
 
     <div style="max-width:800px; margin:auto;">
-        <h2 style="color:var(--primary-blue); margin-bottom:15px; text-align:center;">Related Calculators & Services</h2>
-        <div style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin-bottom:20px;">
-            <a href="emi-calculator.html" class="btn" style="background:#f0f0f0; color:#333;">EMI Calculator</a>
-            <a href="discount-calculator.html" class="btn" style="background:#f0f0f0; color:#333;">Discount Calculator</a>
-            <a href="interest-calculator.html" class="btn" style="background:#f0f0f0; color:#333;">Interest Calculator</a>
-            <a href="calculators.html" class="btn btn-primary">All Calculators</a>
-        </div>
-        <p style="text-align:center; font-size:14px;">Need professional help? Explore our <a href="categories.html" style="color:var(--accent-orange); font-weight:600;">Popular Local Services</a> in Ahmedabad.</p>
+      <h2 style="color:var(--primary-blue); margin-bottom:15px; text-align:center;">Related Calculators & Services</h2>
+      <div style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin-bottom:20px;">
+        <a href="emi-calculator.html" class="btn" style="background:#f0f0f0; color:#333;">EMI Calculator</a>
+        <a href="discount-calculator.html" class="btn" style="background:#f0f0f0; color:#333;">Discount Calculator</a>
+        <a href="interest-calculator.html" class="btn" style="background:#f0f0f0; color:#333;">Interest Calculator</a>
+        <a href="calculators.html" class="btn btn-primary">All Calculators</a>
+      </div>
+      <p style="text-align:center; font-size:14px;">Need professional help? Explore our <a href="categories.html"
+          style="color:var(--accent-orange); font-weight:600;">Popular Local Services</a> in Ahmedabad.</p>
     </div>
 
     <!-- Bottom AdSense Banner -->
-    <div style="width:100%; height:90px; background:#e0e0e0; margin-top:40px; display:flex; align-items:center; justify-content:center; color:#888; border-radius:8px;">
-       [ AdSense Banner Placeholder - Bottom ]
+    <div
+      style="width:100%; height:90px; background:#e0e0e0; margin-top:40px; display:flex; align-items:center; justify-content:center; color:#888; border-radius:8px;">
+      [ AdSense Banner Placeholder - Bottom ]
     </div>
   </div>
 
-    <!-- ================= FOOTER ================= -->
   <footer>
-    <div class="container">
-      <div class="grid">
-        <div>
-          <h4>CitySetu</h4>
-          <p style="font-size:14px;">
-            Connecting digital experts with customers in your city.
-          </p>
-        </div>
-        <div>
-          <h4>Company</h4>
-          <a href="legal.html#about-us">About Us</a>
-          <a href="#">Careers</a>
-        </div>
-        <div>
-          <h4>Support</h4>
-          <a href="#">Help Center</a>
-          <a href="mailto:techdhruv181@gmail.com">Contact</a>
-        </div>
-        <div>
-          <h4>Legal</h4>
-          <a href="legal.html#terms">Terms</a>
-          <a href="legal.html#privacy-policy">Privacy Policy</a>
-        </div>
-      </div>
-      <div style="margin-top:40px; text-align:center; font-size:14px;">
-        © 2026 CitySetu. All rights reserved.
-      </div>
+    <div class="container" style="text-align:center;">
+      <p style="margin-bottom:15px;">CitySetu Calculators - Fast, Free & Accurate</p>
+      © 2026 CitySetu. All rights reserved.
     </div>
   </footer>
 
@@ -131,23 +159,24 @@
     import { calculateSIP } from './js/calculators.js';
 
     document.getElementById("calcBtn").addEventListener("click", () => {
-        const inv = Number(document.getElementById("monthlyInv").value);
-        const rate = Number(document.getElementById("rate").value);
-        const years = Number(document.getElementById("years").value);
+      const inv = Number(document.getElementById("monthlyInv").value);
+      const rate = Number(document.getElementById("rate").value);
+      const years = Number(document.getElementById("years").value);
 
-        if(!inv || !rate || !years) {
-            alert("Please fill all fields!");
-            return;
-        }
+      if (!inv || !rate || !years) {
+        alert("Please fill all fields!");
+        return;
+      }
 
-        const res = calculateSIP(inv, rate, years);
-        if(res) {
-            document.getElementById("resInvested").innerText = res.investedAmount;
-            document.getElementById("resEstReturns").innerText = res.estReturns;
-            document.getElementById("resTotal").innerText = res.totalValue;
-            document.getElementById("resultBox").style.display = "block";
-        }
+      const res = calculateSIP(inv, rate, years);
+      if (res) {
+        document.getElementById("resInvested").innerText = res.investedAmount;
+        document.getElementById("resEstReturns").innerText = res.estReturns;
+        document.getElementById("resTotal").innerText = res.totalValue;
+        document.getElementById("resultBox").style.display = "block";
+      }
     });
   </script>
 </body>
+
 </html>
