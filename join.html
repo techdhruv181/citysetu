@@ -76,9 +76,15 @@
         <input type="email" id="email" placeholder="you@example.com" required>
       </div>
 
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Min. 6 characters" required>
+      <div style="display: flex; gap: 15px;">
+        <div class="form-group" style="flex: 1;">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Min. 6 characters" required>
+        </div>
+        <div class="form-group" style="flex: 1;">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" placeholder="Repeat password" required>
+        </div>
       </div>
 
       <div id="providerFields">

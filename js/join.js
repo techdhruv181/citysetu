@@ -23,6 +23,8 @@ form.addEventListener("submit", async (e) => {
   const category = document.getElementById("category").value.trim();
   const priceStart = Number(document.getElementById("priceStart").value);
 
+  const city = document.getElementById("city") ? document.getElementById("city").value : "Ahmedabad";
+
   const password = document.getElementById("password").value;
   const confirmPassword = document.getElementById("confirmPassword").value;
 
@@ -73,6 +75,7 @@ form.addEventListener("submit", async (e) => {
         name,
         email,
         phone,
+        city,
         category: category,
         priceStart,
         role: "provider",
